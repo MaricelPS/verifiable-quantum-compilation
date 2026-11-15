@@ -1,0 +1,71 @@
+Seeding parameters from /kaggle/working/toolkit/FeMoCo76o113e_65_60_60_sorted.npz
+Training U/V (65, 60, 76) and W (65, 60, 60) with generators None for 20000 epochs with DF-THC-SOS.
+B@epoch 0: ε_fro=134.7mHa, λ_eff=96.33Ha, Λ=314.06Ha (Λ_1=20.312, Λ_2=293.8), cost = 148.6mHa, E_SOS: -22155.410Ha, gap: 15.1367Ha, ms/it: 5.63
+B@epoch 1000: ε_fro=16.0mHa, λ_eff=50.12Ha, Λ=308.84Ha (Λ_1=12.885, Λ_2=296.0), cost = 16.1mHa, E_SOS: -22144.367Ha, gap: 4.0938Ha, ms/it: 85.68
+B@epoch 2000: ε_fro=16.0mHa, λ_eff=49.02Ha, Λ=308.68Ha (Λ_1=12.721, Λ_2=296.0), cost = 15.7mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 85.35
+  epoch 3000: ε_fro=16.0mHa, λ_eff=52.52Ha, Λ=313.04Ha (Λ_1=12.102, Λ_2=300.9), cost = 16.7mHa, E_SOS: -22144.711Ha, gap: 4.4375Ha, ms/it: 85.06
+  epoch 4000: ε_fro=18.1mHa, λ_eff=92.17Ha, Λ=321.37Ha (Λ_1=21.543, Λ_2=299.8), cost = 30.8mHa, E_SOS: -22153.773Ha, gap: 13.5000Ha, ms/it: 85.23
+  epoch 5000: ε_fro=16.0mHa, λ_eff=56.11Ha, Λ=316.04Ha (Λ_1=12.218, Λ_2=303.8), cost = 17.9mHa, E_SOS: -22145.295Ha, gap: 5.0215Ha, ms/it: 84.90
+  epoch 6000: ε_fro=16.0mHa, λ_eff=49.72Ha, Λ=314.35Ha (Λ_1=11.834, Λ_2=302.5), cost = 15.9mHa, E_SOS: -22144.230Ha, gap: 3.9570Ha, ms/it: 85.14
+  epoch 7000: ε_fro=16.2mHa, λ_eff=57.90Ha, Λ=317.26Ha (Λ_1=12.236, Λ_2=305.0), cost = 18.6mHa, E_SOS: -22145.602Ha, gap: 5.3281Ha, ms/it: 85.12
+  epoch 8000: ε_fro=16.0mHa, λ_eff=50.81Ha, Λ=315.48Ha (Λ_1=11.646, Λ_2=303.8), cost = 16.2mHa, E_SOS: -22144.393Ha, gap: 4.1191Ha, ms/it: 84.91
+  epoch 9000: ε_fro=16.8mHa, λ_eff=62.43Ha, Λ=318.45Ha (Λ_1=13.377, Λ_2=305.1), cost = 20.6mHa, E_SOS: -22146.453Ha, gap: 6.1797Ha, ms/it: 85.23
+  epoch 10000: ε_fro=16.1mHa, λ_eff=51.59Ha, Λ=316.40Ha (Λ_1=11.866, Λ_2=304.5), cost = 16.5mHa, E_SOS: -22144.508Ha, gap: 4.2344Ha, ms/it: 85.11
+  epoch 11000: ε_fro=18.3mHa, λ_eff=73.72Ha, Λ=321.64Ha (Λ_1=15.154, Λ_2=306.5), cost = 25.4mHa, E_SOS: -22148.836Ha, gap: 8.5625Ha, ms/it: 85.06
+  epoch 12000: ε_fro=16.1mHa, λ_eff=52.30Ha, Λ=317.88Ha (Λ_1=12.086, Λ_2=305.8), cost = 16.8mHa, E_SOS: -22144.605Ha, gap: 4.3320Ha, ms/it: 85.22
+  epoch 13000: ε_fro=24.3mHa, λ_eff=90.78Ha, Λ=325.08Ha (Λ_1=20.726, Λ_2=304.3), cost = 36.5mHa, E_SOS: -22153.205Ha, gap: 12.9316Ha, ms/it: 85.16
+  epoch 14000: ε_fro=16.2mHa, λ_eff=53.16Ha, Λ=318.82Ha (Λ_1=12.266, Λ_2=306.6), cost = 17.2mHa, E_SOS: -22144.736Ha, gap: 4.4629Ha, ms/it: 84.96
+  epoch 15000: ε_fro=34.9mHa, λ_eff=117.39Ha, Λ=333.30Ha (Λ_1=29.016, Λ_2=304.3), cost = 55.1mHa, E_SOS: -22161.631Ha, gap: 21.3574Ha, ms/it: 85.23
+  epoch 16000: ε_fro=16.2mHa, λ_eff=54.89Ha, Λ=319.56Ha (Λ_1=12.539, Λ_2=307.0), cost = 17.6mHa, E_SOS: -22145.023Ha, gap: 4.7500Ha, ms/it: 85.25
+  epoch 17000: ε_fro=78.4mHa, λ_eff=134.86Ha, Λ=339.07Ha (Λ_1=36.875, Λ_2=302.2), cost = 103.9mHa, E_SOS: -22168.246Ha, gap: 27.9727Ha, ms/it: 85.01
+  epoch 18000: ε_fro=16.3mHa, λ_eff=54.61Ha, Λ=319.66Ha (Λ_1=12.706, Λ_2=307.0), cost = 17.7mHa, E_SOS: -22144.973Ha, gap: 4.6992Ha, ms/it: 85.19
+  epoch 19000: ε_fro=103.0mHa, λ_eff=135.74Ha, Λ=340.40Ha (Λ_1=37.240, Λ_2=303.2), cost = 128.7mHa, E_SOS: -22168.508Ha, gap: 28.2344Ha, ms/it: 85.08
+  epoch 19990: ε_fro=16.3mHa, λ_eff=54.86Ha, Λ=320.09Ha (Λ_1=12.858, Λ_2=307.2), cost = 17.7mHa, E_SOS: -22145.010Ha, gap: 4.7363Ha, ms/it: 84.04
+Saved optimized solution to /kaggle/working/runs/lambda_only.npz
+built /kaggle/working/builds/lambda_only_b10/dfthcsos: R,B,C=65,60,60 brot=10 J=10  e1=13.60 e2=36.13 mHa lam_eff=49.1896
+built /kaggle/working/builds/lambda_only_b11/dfthcsos: R,B,C=65,60,60 brot=11 J=9  e1=6.35 e2=23.22 mHa lam_eff=49.1038
+built /kaggle/working/builds/lambda_only_b12/dfthcsos: R,B,C=65,60,60 brot=12 J=8  e1=3.24 e2=18.02 mHa lam_eff=49.0449
+{
+ "name": "lambda_only",
+ "rank": 65,
+ "bases": 60,
+ "copies": 60,
+ "epochs": 20000,
+ "lr": 0.0001,
+ "rho": 0.0003,
+ "epsilon_dfthc": 0.015,
+ "train_seconds": 1732,
+ "b10_local": {
+  "error_1": 0.013597537974089295,
+  "error_2": 0.03613132255130187,
+  "Lambda": 308.74323418228823,
+  "E_gap": 3.9436760015996697,
+  "lambda_eff": 49.18957192532093
+ },
+ "b11_local": {
+  "error_1": 0.006349456587750346,
+  "error_2": 0.02322490593915876,
+  "Lambda": 308.69949287801757,
+  "E_gap": 3.930403358386684,
+  "lambda_eff": 49.103757254617854
+ },
+ "b12_local": {
+  "error_1": 0.0032435402320795136,
+  "error_2": 0.01801581886892944,
+  "Lambda": 308.6993204551067,
+  "E_gap": 3.9209265840145235,
+  "lambda_eff": 49.04488840645946
+ },
+ "brot": 12,
+ "folder": "/kaggle/working/builds/lambda_only_b12/dfthcsos",
+ "status": "PASS",
+ "cost": 3338142614.5010033,
+ "error": null,
+ "improvement": 1.0052295470357377,
+ "resources": {
+  "toffoli": 93237.0,
+  "qubits": 730,
+  "angles_toffoli": 79480.0
+ }
+}
+exit code 0

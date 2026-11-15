@@ -1,0 +1,10 @@
+sub-step 0: 72.0 iterations per shot (min 71, max 72)
+sub-step 1: 40.0 iterations per shot (min 36, max 49)
+sub-step 2: 32.0 iterations per shot (min 23, max 36)
+sub-step 3: 72.0 iterations per shot (min 71, max 72)
+EEA finishes at iteration 213-216 of 222
+iteration  10:    2 of 2560 shots off the majority sub-step (0.08%)
+iteration  50:    5 of 2560 shots off the majority sub-step (0.20%)
+iteration 100:   11 of 2560 shots off the majority sub-step (0.43%)
+iteration 130:   17 of 2560 shots off the majority sub-step (0.66%)
+iteration 150:   55 of 2560 shots off the majority sub-step (2.15%)

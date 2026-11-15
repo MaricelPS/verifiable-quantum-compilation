@@ -1,0 +1,9 @@
+# Competition data and generated artifacts are not redistributed
+*.npz
+*.npy
+*.kmb
+builds/
+runs/
+__pycache__/
+.ipynb_checkpoints/
+competition/

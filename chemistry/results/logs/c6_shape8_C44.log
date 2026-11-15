@@ -1,0 +1,511 @@
+6.4s 1 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.4s 2 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.4s 3 0.00s - to python to disable frozen modules.
+6.4s 4 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+6.9s 5 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.9s 6 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.9s 7 0.00s - to python to disable frozen modules.
+6.9s 8 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+10.9s 9 competition : /kaggle/input/competitions/google-verifiable-quantum-circuit-compilation
+10.9s 10 starter kit : /kaggle/input/datasets/sohier/verifiable-circuit-compilation-starter-kit/starter_kit
+10.9s 11 toolkit     : /kaggle/input/datasets/mariaperezschmit/dfthcsos-toolkit/dfthcsos_toolkit_v5
+12.1s 12 ok
+24.0s 13 JAX backend: gpu
+39.0s 14 seed: /kaggle/working/seeds/init_8_143_44.npz (8, 143, 76)
+39.2s 15 === S8_stage1: seed init_8_143_44.npz, {'rank': 8, 'bases': 143, 'copies': 44, 'epochs': 100000, 'lr': 0.001, 'rho': 0.001, 'epsilon_dfthc': 0.015}
+62.7s 16 Seeding parameters from /kaggle/working/seeds/init_8_143_44.npz
+62.7s 17 Training U/V (8, 143, 76) and W (8, 143, 44) with generators None for 100000 epochs with DF-THC-SOS.
+67.4s 18 B@epoch 0: ε_fro=1139.3mHa, λ_eff=1964.06Ha, Λ=2507.58Ha (Λ_1=752.107, Λ_2=1755.5), cost = 3088.3mHa, E_SOS: -23088.869Ha, gap: 948.5957Ha, ms/it: 4.52
+76.9s 19 B@epoch 1000: ε_fro=114.8mHa, λ_eff=433.61Ha, Λ=593.61Ha (Λ_1=3.920, Λ_2=589.7), cost = 533.4mHa, E_SOS: -22328.479Ha, gap: 188.2051Ha, ms/it: 9.54
+86.6s 20 B@epoch 2000: ε_fro=91.2mHa, λ_eff=371.87Ha, Λ=496.95Ha (Λ_1=3.076, Λ_2=493.9), cost = 448.1mHa, E_SOS: -22307.570Ha, gap: 167.2969Ha, ms/it: 9.63
+96.4s 21 B@epoch 3000: ε_fro=78.3mHa, λ_eff=331.91Ha, Λ=445.90Ha (Λ_1=2.060, Λ_2=443.8), cost = 395.2mHa, E_SOS: -22288.408Ha, gap: 148.1348Ha, ms/it: 9.79
+106.4s 22 B@epoch 4000: ε_fro=71.2mHa, λ_eff=302.58Ha, Λ=414.80Ha (Λ_1=1.140, Λ_2=413.7), cost = 358.8mHa, E_SOS: -22271.346Ha, gap: 131.0723Ha, ms/it: 10.03
+116.5s 23 B@epoch 5000: ε_fro=65.1mHa, λ_eff=281.93Ha, Λ=394.28Ha (Λ_1=1.643, Λ_2=392.6), cost = 332.0mHa, E_SOS: -22258.920Ha, gap: 118.6465Ha, ms/it: 10.12
+126.7s 24 B@epoch 6000: ε_fro=61.5mHa, λ_eff=262.11Ha, Λ=378.98Ha (Λ_1=1.260, Λ_2=377.7), cost = 308.6mHa, E_SOS: -22245.533Ha, gap: 105.2598Ha, ms/it: 10.15
+137.1s 25 B@epoch 7000: ε_fro=59.6mHa, λ_eff=245.25Ha, Λ=369.38Ha (Λ_1=1.135, Λ_2=368.2), cost = 289.9mHa, E_SOS: -22233.439Ha, gap: 93.1660Ha, ms/it: 10.43
+147.7s 26 B@epoch 8000: ε_fro=56.2mHa, λ_eff=230.93Ha, Λ=362.77Ha (Λ_1=1.305, Λ_2=361.5), cost = 272.2mHa, E_SOS: -22223.270Ha, gap: 82.9961Ha, ms/it: 10.64
+158.7s 27 B@epoch 9000: ε_fro=55.2mHa, λ_eff=216.37Ha, Λ=357.63Ha (Λ_1=1.202, Λ_2=356.4), cost = 256.5mHa, E_SOS: -22213.148Ha, gap: 72.8750Ha, ms/it: 10.97
+170.0s 28 B@epoch 10000: ε_fro=53.8mHa, λ_eff=203.46Ha, Λ=354.09Ha (Λ_1=1.242, Λ_2=352.8), cost = 242.2mHa, E_SOS: -22204.564Ha, gap: 64.2910Ha, ms/it: 11.30
+181.6s 29 B@epoch 11000: ε_fro=53.2mHa, λ_eff=190.65Ha, Λ=351.54Ha (Λ_1=1.364, Λ_2=350.2), cost = 228.9mHa, E_SOS: -22196.463Ha, gap: 56.1895Ha, ms/it: 11.57
+192.8s 30 B@epoch 12000: ε_fro=52.1mHa, λ_eff=178.29Ha, Λ=349.93Ha (Λ_1=1.425, Λ_2=348.5), cost = 215.4mHa, E_SOS: -22189.100Ha, gap: 48.8262Ha, ms/it: 11.19
+203.6s 31 B@epoch 13000: ε_fro=52.9mHa, λ_eff=165.48Ha, Λ=349.29Ha (Λ_1=1.414, Λ_2=347.9), cost = 203.4mHa, E_SOS: -22181.959Ha, gap: 41.6855Ha, ms/it: 10.87
+214.4s 32 B@epoch 14000: ε_fro=51.5mHa, λ_eff=154.43Ha, Λ=349.87Ha (Λ_1=1.688, Λ_2=348.2), cost = 190.9mHa, E_SOS: -22176.201Ha, gap: 35.9277Ha, ms/it: 10.74
+225.1s 33 B@epoch 15000: ε_fro=52.0mHa, λ_eff=143.65Ha, Λ=351.18Ha (Λ_1=1.798, Λ_2=349.4), cost = 180.6mHa, E_SOS: -22170.998Ha, gap: 30.7246Ha, ms/it: 10.68
+235.9s 34 B@epoch 16000: ε_fro=50.9mHa, λ_eff=132.28Ha, Λ=354.96Ha (Λ_1=2.441, Λ_2=352.5), cost = 168.2mHa, E_SOS: -22165.844Ha, gap: 25.5703Ha, ms/it: 10.82
+246.8s 35 B@epoch 17000: ε_fro=50.9mHa, λ_eff=119.86Ha, Λ=359.44Ha (Λ_1=2.541, Λ_2=356.9), cost = 155.8mHa, E_SOS: -22160.848Ha, gap: 20.5742Ha, ms/it: 10.93
+257.9s 36 B@epoch 18000: ε_fro=51.5mHa, λ_eff=106.36Ha, Λ=365.64Ha (Λ_1=2.655, Λ_2=363.0), cost = 142.8mHa, E_SOS: -22156.084Ha, gap: 15.8105Ha, ms/it: 11.10
+269.0s 37 B@epoch 19000: ε_fro=52.6mHa, λ_eff=91.41Ha, Λ=374.62Ha (Λ_1=2.762, Λ_2=371.9), cost = 129.0mHa, E_SOS: -22151.596Ha, gap: 11.3223Ha, ms/it: 11.13
+280.1s 38 B@epoch 20000: ε_fro=58.6mHa, λ_eff=72.25Ha, Λ=385.97Ha (Λ_1=3.008, Λ_2=383.0), cost = 115.9mHa, E_SOS: -22147.096Ha, gap: 6.8223Ha, ms/it: 11.03
+291.1s 39 B@epoch 21000: ε_fro=63.0mHa, λ_eff=58.86Ha, Λ=393.49Ha (Λ_1=3.071, Λ_2=390.4), cost = 106.8mHa, E_SOS: -22144.701Ha, gap: 4.4277Ha, ms/it: 11.00
+302.0s 40 epoch 22000: ε_fro=63.2mHa, λ_eff=92.66Ha, Λ=470.23Ha (Λ_1=6.701, Λ_2=463.5), cost = 140.8mHa, E_SOS: -22149.492Ha, gap: 9.2188Ha, ms/it: 10.95
+312.9s 41 epoch 23000: ε_fro=64.6mHa, λ_eff=96.27Ha, Λ=508.46Ha (Λ_1=7.016, Λ_2=501.4), cost = 145.9mHa, E_SOS: -22149.471Ha, gap: 9.1973Ha, ms/it: 10.92
+323.8s 42 epoch 24000: ε_fro=69.5mHa, λ_eff=61.34Ha, Λ=466.26Ha (Λ_1=2.713, Λ_2=463.5), cost = 115.9mHa, E_SOS: -22144.326Ha, gap: 4.0527Ha, ms/it: 10.89
+334.7s 43 epoch 25000: ε_fro=79.1mHa, λ_eff=144.04Ha, Λ=533.04Ha (Λ_1=18.574, Λ_2=514.5), cost = 208.1mHa, E_SOS: -22160.104Ha, gap: 19.8301Ha, ms/it: 10.91
+345.6s 44 epoch 26000: ε_fro=65.9mHa, λ_eff=109.91Ha, Λ=509.04Ha (Λ_1=10.874, Λ_2=498.2), cost = 160.9mHa, E_SOS: -22152.281Ha, gap: 12.0078Ha, ms/it: 10.87
+356.5s 45 epoch 27000: ε_fro=66.2mHa, λ_eff=88.57Ha, Λ=508.93Ha (Λ_1=7.056, Λ_2=501.9), cost = 139.8mHa, E_SOS: -22148.039Ha, gap: 7.7656Ha, ms/it: 10.91
+367.4s 46 epoch 28000: ε_fro=1107.5mHa, λ_eff=308.06Ha, Λ=595.26Ha (Λ_1=67.747, Λ_2=527.5), cost = 1400.6mHa, E_SOS: -22226.186Ha, gap: 85.9121Ha, ms/it: 10.88
+378.3s 47 epoch 29000: ε_fro=77.3mHa, λ_eff=135.51Ha, Λ=527.15Ha (Λ_1=17.766, Λ_2=509.4), cost = 197.8mHa, E_SOS: -22157.988Ha, gap: 17.7148Ha, ms/it: 10.93
+389.3s 48 epoch 30000: ε_fro=67.3mHa, λ_eff=106.50Ha, Λ=521.54Ha (Λ_1=11.146, Λ_2=510.4), cost = 158.8mHa, E_SOS: -22151.264Ha, gap: 10.9902Ha, ms/it: 10.96
+400.2s 49 epoch 31000: ε_fro=70.5mHa, λ_eff=72.87Ha, Λ=497.37Ha (Λ_1=6.059, Λ_2=491.3), cost = 128.4mHa, E_SOS: -22145.641Ha, gap: 5.3672Ha, ms/it: 10.96
+411.2s 50 epoch 32000: ε_fro=67.1mHa, λ_eff=98.36Ha, Λ=502.15Ha (Λ_1=10.427, Λ_2=491.7), cost = 150.4mHa, E_SOS: -22150.000Ha, gap: 9.7266Ha, ms/it: 10.97
+422.2s 51 epoch 33000: ε_fro=108.8mHa, λ_eff=107.21Ha, Λ=506.80Ha (Λ_1=12.733, Λ_2=494.1), cost = 201.0mHa, E_SOS: -22151.742Ha, gap: 11.4688Ha, ms/it: 10.98
+433.2s 52 epoch 34000: ε_fro=81.3mHa, λ_eff=82.85Ha, Λ=494.75Ha (Λ_1=8.333, Λ_2=486.4), cost = 149.2mHa, E_SOS: -22147.260Ha, gap: 6.9863Ha, ms/it: 10.95
+444.1s 53 epoch 35000: ε_fro=320.6mHa, λ_eff=178.66Ha, Λ=507.01Ha (Λ_1=23.665, Λ_2=483.3), cost = 484.2mHa, E_SOS: -22172.793Ha, gap: 32.5195Ha, ms/it: 10.98
+455.1s 54 epoch 36000: ε_fro=65.1mHa, λ_eff=64.16Ha, Λ=485.77Ha (Λ_1=5.291, Λ_2=480.5), cost = 114.3mHa, E_SOS: -22144.529Ha, gap: 4.2559Ha, ms/it: 10.98
+466.1s 55 epoch 37000: ε_fro=123.4mHa, λ_eff=116.09Ha, Λ=494.52Ha (Λ_1=14.368, Λ_2=480.1), cost = 224.5mHa, E_SOS: -22154.092Ha, gap: 13.8184Ha, ms/it: 10.99
+477.1s 56 epoch 38000: ε_fro=293.0mHa, λ_eff=146.80Ha, Λ=511.58Ha (Λ_1=23.659, Λ_2=487.9), cost = 424.8mHa, E_SOS: -22161.789Ha, gap: 21.5156Ha, ms/it: 10.97
+488.1s 57 epoch 39000: ε_fro=702.3mHa, λ_eff=270.46Ha, Λ=528.59Ha (Λ_1=52.659, Λ_2=475.9), cost = 957.8mHa, E_SOS: -22214.707Ha, gap: 74.4336Ha, ms/it: 11.00
+499.1s 58 epoch 40000: ε_fro=90.8mHa, λ_eff=107.33Ha, Λ=490.72Ha (Λ_1=12.321, Λ_2=478.4), cost = 183.1mHa, E_SOS: -22152.154Ha, gap: 11.8809Ha, ms/it: 11.02
+510.2s 59 epoch 41000: ε_fro=64.4mHa, λ_eff=64.95Ha, Λ=482.43Ha (Λ_1=5.749, Λ_2=476.7), cost = 114.4mHa, E_SOS: -22144.666Ha, gap: 4.3926Ha, ms/it: 11.05
+521.1s 60 epoch 42000: ε_fro=66.6mHa, λ_eff=67.13Ha, Λ=485.82Ha (Λ_1=6.271, Λ_2=479.6), cost = 118.8mHa, E_SOS: -22144.934Ha, gap: 4.6602Ha, ms/it: 10.98
+532.1s 61 epoch 43000: ε_fro=60.3mHa, λ_eff=69.62Ha, Λ=481.75Ha (Λ_1=6.322, Λ_2=475.4), cost = 114.9mHa, E_SOS: -22145.330Ha, gap: 5.0566Ha, ms/it: 11.00
+543.1s 62 epoch 44000: ε_fro=89.7mHa, λ_eff=105.16Ha, Λ=486.61Ha (Λ_1=12.057, Λ_2=474.6), cost = 179.8mHa, E_SOS: -22151.771Ha, gap: 11.4980Ha, ms/it: 11.01
+554.2s 63 epoch 45000: ε_fro=64.6mHa, λ_eff=66.17Ha, Λ=483.08Ha (Λ_1=6.116, Λ_2=477.0), cost = 115.8mHa, E_SOS: -22144.826Ha, gap: 4.5527Ha, ms/it: 11.01
+565.2s 64 epoch 46000: ε_fro=200.8mHa, λ_eff=138.19Ha, Λ=490.38Ha (Λ_1=17.371, Λ_2=473.0), cost = 324.0mHa, E_SOS: -22160.146Ha, gap: 19.8730Ha, ms/it: 11.03
+576.2s 65 epoch 47000: ε_fro=60.5mHa, λ_eff=65.76Ha, Λ=479.64Ha (Λ_1=5.906, Λ_2=473.7), cost = 111.3mHa, E_SOS: -22144.803Ha, gap: 4.5293Ha, ms/it: 11.02
+587.2s 66 epoch 48000: ε_fro=64.6mHa, λ_eff=89.10Ha, Λ=480.78Ha (Λ_1=9.302, Λ_2=471.5), cost = 138.7mHa, E_SOS: -22148.602Ha, gap: 8.3281Ha, ms/it: 10.94
+598.1s 67 B@epoch 49000: ε_fro=60.8mHa, λ_eff=60.94Ha, Λ=475.68Ha (Λ_1=5.318, Λ_2=470.4), cost = 106.8mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.96
+609.1s 68 epoch 50000: ε_fro=289.7mHa, λ_eff=166.75Ha, Λ=491.12Ha (Λ_1=21.554, Λ_2=469.6), cost = 441.4mHa, E_SOS: -22169.447Ha, gap: 29.1738Ha, ms/it: 11.00
+620.1s 69 B@epoch 51000: ε_fro=59.7mHa, λ_eff=61.42Ha, Λ=474.48Ha (Λ_1=5.403, Λ_2=469.1), cost = 106.2mHa, E_SOS: -22144.266Ha, gap: 3.9922Ha, ms/it: 10.99
+631.2s 70 B@epoch 52000: ε_fro=59.6mHa, λ_eff=61.22Ha, Λ=473.90Ha (Λ_1=5.381, Λ_2=468.5), cost = 105.8mHa, E_SOS: -22144.244Ha, gap: 3.9707Ha, ms/it: 11.05
+642.2s 71 B@epoch 53000: ε_fro=59.5mHa, λ_eff=61.06Ha, Λ=473.51Ha (Λ_1=5.397, Λ_2=468.1), cost = 105.6mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 11.02
+653.1s 72 B@epoch 54000: ε_fro=59.2mHa, λ_eff=61.09Ha, Λ=473.23Ha (Λ_1=5.392, Λ_2=467.8), cost = 105.3mHa, E_SOS: -22144.232Ha, gap: 3.9590Ha, ms/it: 10.98
+664.1s 73 epoch 55000: ε_fro=54.7mHa, λ_eff=69.50Ha, Λ=474.49Ha (Λ_1=6.449, Λ_2=468.0), cost = 109.2mHa, E_SOS: -22145.391Ha, gap: 5.1172Ha, ms/it: 10.95
+675.1s 74 B@epoch 56000: ε_fro=58.6mHa, λ_eff=60.72Ha, Λ=472.02Ha (Λ_1=5.384, Λ_2=466.6), cost = 104.4mHa, E_SOS: -22144.195Ha, gap: 3.9219Ha, ms/it: 11.00
+686.1s 75 epoch 57000: ε_fro=77.5mHa, λ_eff=98.76Ha, Λ=477.65Ha (Λ_1=10.759, Λ_2=466.9), cost = 161.2mHa, E_SOS: -22150.596Ha, gap: 10.3223Ha, ms/it: 10.96
+697.1s 76 B@epoch 58000: ε_fro=57.8mHa, λ_eff=61.34Ha, Λ=471.47Ha (Λ_1=5.479, Λ_2=466.0), cost = 104.2mHa, E_SOS: -22144.281Ha, gap: 4.0078Ha, ms/it: 11.03
+708.1s 77 B@epoch 59000: ε_fro=58.3mHa, λ_eff=60.86Ha, Λ=471.60Ha (Λ_1=5.468, Λ_2=466.1), cost = 104.2mHa, E_SOS: -22144.217Ha, gap: 3.9434Ha, ms/it: 10.99
+719.1s 78 B@epoch 60000: ε_fro=57.8mHa, λ_eff=60.72Ha, Λ=470.67Ha (Λ_1=5.446, Λ_2=465.2), cost = 103.6mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 10.97
+730.0s 79 B@epoch 61000: ε_fro=57.3mHa, λ_eff=61.10Ha, Λ=470.01Ha (Λ_1=5.505, Λ_2=464.5), cost = 103.4mHa, E_SOS: -22144.262Ha, gap: 3.9883Ha, ms/it: 10.98
+741.0s 80 B@epoch 62000: ε_fro=57.2mHa, λ_eff=60.97Ha, Λ=469.89Ha (Λ_1=5.489, Λ_2=464.4), cost = 103.2mHa, E_SOS: -22144.246Ha, gap: 3.9727Ha, ms/it: 10.94
+752.0s 81 B@epoch 63000: ε_fro=57.2mHa, λ_eff=60.68Ha, Λ=469.48Ha (Λ_1=5.487, Λ_2=464.0), cost = 102.9mHa, E_SOS: -22144.211Ha, gap: 3.9375Ha, ms/it: 10.99
+763.0s 82 B@epoch 64000: ε_fro=56.8mHa, λ_eff=60.75Ha, Λ=468.70Ha (Λ_1=5.494, Λ_2=463.2), cost = 102.5mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 11.00
+774.0s 83 B@epoch 65000: ε_fro=56.9mHa, λ_eff=60.46Ha, Λ=468.68Ha (Λ_1=5.483, Λ_2=463.2), cost = 102.3mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.01
+785.0s 84 B@epoch 66000: ε_fro=56.5mHa, λ_eff=60.55Ha, Λ=468.17Ha (Λ_1=5.499, Λ_2=462.7), cost = 102.1mHa, E_SOS: -22144.205Ha, gap: 3.9316Ha, ms/it: 10.98
+795.9s 85 B@epoch 67000: ε_fro=56.0mHa, λ_eff=60.75Ha, Λ=467.55Ha (Λ_1=5.530, Λ_2=462.0), cost = 101.8mHa, E_SOS: -22144.236Ha, gap: 3.9629Ha, ms/it: 10.99
+806.9s 86 B@epoch 68000: ε_fro=56.2mHa, λ_eff=60.49Ha, Λ=467.47Ha (Λ_1=5.520, Λ_2=462.0), cost = 101.6mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 10.99
+817.9s 87 B@epoch 69000: ε_fro=55.8mHa, λ_eff=60.44Ha, Λ=466.81Ha (Λ_1=5.522, Λ_2=461.3), cost = 101.3mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 11.00
+828.9s 88 B@epoch 70000: ε_fro=55.9mHa, λ_eff=60.36Ha, Λ=466.71Ha (Λ_1=5.521, Λ_2=461.2), cost = 101.2mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.99
+839.9s 89 B@epoch 71000: ε_fro=55.6mHa, λ_eff=60.32Ha, Λ=466.32Ha (Λ_1=5.535, Λ_2=460.8), cost = 100.9mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.99
+850.9s 90 epoch 72000: ε_fro=53.3mHa, λ_eff=63.73Ha, Λ=466.58Ha (Λ_1=5.921, Λ_2=460.7), cost = 102.1mHa, E_SOS: -22144.646Ha, gap: 4.3730Ha, ms/it: 10.99
+861.9s 91 B@epoch 73000: ε_fro=55.1mHa, λ_eff=60.58Ha, Λ=465.75Ha (Λ_1=5.579, Λ_2=460.2), cost = 100.7mHa, E_SOS: -22144.230Ha, gap: 3.9570Ha, ms/it: 10.98
+872.9s 92 B@epoch 74000: ε_fro=55.2mHa, λ_eff=60.30Ha, Λ=465.58Ha (Λ_1=5.566, Λ_2=460.0), cost = 100.5mHa, E_SOS: -22144.195Ha, gap: 3.9219Ha, ms/it: 10.98
+883.8s 93 B@epoch 75000: ε_fro=54.8mHa, λ_eff=60.57Ha, Λ=465.16Ha (Λ_1=5.607, Λ_2=459.6), cost = 100.3mHa, E_SOS: -22144.234Ha, gap: 3.9609Ha, ms/it: 10.95
+894.8s 94 B@epoch 76000: ε_fro=54.8mHa, λ_eff=60.32Ha, Λ=464.93Ha (Λ_1=5.585, Λ_2=459.3), cost = 100.2mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 10.97
+905.8s 95 B@epoch 77000: ε_fro=54.6mHa, λ_eff=60.37Ha, Λ=464.71Ha (Λ_1=5.609, Λ_2=459.1), cost = 100.0mHa, E_SOS: -22144.211Ha, gap: 3.9375Ha, ms/it: 10.97
+916.7s 96 B@epoch 78000: ε_fro=54.6mHa, λ_eff=60.29Ha, Λ=464.42Ha (Λ_1=5.607, Λ_2=458.8), cost = 99.9mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 10.97
+927.7s 97 B@epoch 79000: ε_fro=54.3mHa, λ_eff=60.34Ha, Λ=463.91Ha (Λ_1=5.623, Λ_2=458.3), cost = 99.6mHa, E_SOS: -22144.215Ha, gap: 3.9414Ha, ms/it: 10.97
+938.7s 98 B@epoch 80000: ε_fro=54.3mHa, λ_eff=60.15Ha, Λ=463.63Ha (Λ_1=5.614, Λ_2=458.0), cost = 99.4mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.97
+949.6s 99 B@epoch 81000: ε_fro=54.1mHa, λ_eff=60.32Ha, Λ=463.39Ha (Λ_1=5.637, Λ_2=457.8), cost = 99.4mHa, E_SOS: -22144.217Ha, gap: 3.9434Ha, ms/it: 10.97
+960.6s 100 B@epoch 82000: ε_fro=53.9mHa, λ_eff=60.41Ha, Λ=463.17Ha (Λ_1=5.661, Λ_2=457.5), cost = 99.3mHa, E_SOS: -22144.230Ha, gap: 3.9570Ha, ms/it: 10.99
+971.6s 101 B@epoch 83000: ε_fro=54.0mHa, λ_eff=60.16Ha, Λ=462.90Ha (Λ_1=5.641, Λ_2=457.3), cost = 99.1mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 10.97
+982.5s 102 B@epoch 84000: ε_fro=53.9mHa, λ_eff=60.10Ha, Λ=462.63Ha (Λ_1=5.638, Λ_2=457.0), cost = 99.0mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.94
+993.5s 103 B@epoch 85000: ε_fro=53.7mHa, λ_eff=60.17Ha, Λ=462.38Ha (Λ_1=5.655, Λ_2=456.7), cost = 98.9mHa, E_SOS: -22144.205Ha, gap: 3.9316Ha, ms/it: 10.99
+1004.5s 104 B@epoch 86000: ε_fro=53.7mHa, λ_eff=60.03Ha, Λ=462.09Ha (Λ_1=5.648, Λ_2=456.4), cost = 98.7mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.98
+1015.5s 105 B@epoch 87000: ε_fro=53.6mHa, λ_eff=60.05Ha, Λ=461.98Ha (Λ_1=5.654, Λ_2=456.3), cost = 98.7mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.96
+1026.4s 106 B@epoch 88000: ε_fro=53.5mHa, λ_eff=60.08Ha, Λ=461.74Ha (Λ_1=5.665, Λ_2=456.1), cost = 98.6mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 10.95
+1037.4s 107 B@epoch 89000: ε_fro=53.3mHa, λ_eff=60.26Ha, Λ=461.43Ha (Λ_1=5.696, Λ_2=455.7), cost = 98.5mHa, E_SOS: -22144.225Ha, gap: 3.9512Ha, ms/it: 10.97
+1048.4s 108 B@epoch 90000: ε_fro=53.2mHa, λ_eff=60.26Ha, Λ=461.21Ha (Λ_1=5.701, Λ_2=455.5), cost = 98.4mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 10.97
+1059.3s 109 B@epoch 91000: ε_fro=53.2mHa, λ_eff=60.14Ha, Λ=460.98Ha (Λ_1=5.699, Λ_2=455.3), cost = 98.3mHa, E_SOS: -22144.213Ha, gap: 3.9395Ha, ms/it: 10.99
+1070.3s 110 B@epoch 92000: ε_fro=53.1mHa, λ_eff=60.08Ha, Λ=460.84Ha (Λ_1=5.701, Λ_2=455.1), cost = 98.2mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 10.96
+1081.3s 111 B@epoch 93000: ε_fro=53.0mHa, λ_eff=60.07Ha, Λ=460.58Ha (Λ_1=5.703, Λ_2=454.9), cost = 98.1mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 11.01
+1092.3s 112 B@epoch 94000: ε_fro=53.0mHa, λ_eff=59.96Ha, Λ=460.37Ha (Λ_1=5.699, Λ_2=454.7), cost = 98.0mHa, E_SOS: -22144.195Ha, gap: 3.9219Ha, ms/it: 10.97
+1103.3s 113 B@epoch 95000: ε_fro=53.0mHa, λ_eff=59.91Ha, Λ=460.17Ha (Λ_1=5.693, Λ_2=454.5), cost = 97.9mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.99
+1114.3s 114 B@epoch 96000: ε_fro=52.8mHa, λ_eff=60.07Ha, Λ=459.99Ha (Λ_1=5.712, Λ_2=454.3), cost = 97.9mHa, E_SOS: -22144.213Ha, gap: 3.9395Ha, ms/it: 11.01
+1125.3s 115 B@epoch 97000: ε_fro=52.7mHa, λ_eff=60.19Ha, Λ=459.82Ha (Λ_1=5.728, Λ_2=454.1), cost = 97.9mHa, E_SOS: -22144.230Ha, gap: 3.9570Ha, ms/it: 10.99
+1136.3s 116 B@epoch 98000: ε_fro=52.8mHa, λ_eff=59.89Ha, Λ=459.69Ha (Λ_1=5.700, Λ_2=454.0), cost = 97.7mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.00
+1147.3s 117 B@epoch 99000: ε_fro=52.7mHa, λ_eff=59.93Ha, Λ=459.41Ha (Λ_1=5.711, Λ_2=453.7), cost = 97.7mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.00
+1158.1s 118 B@epoch 99990: ε_fro=52.7mHa, λ_eff=59.86Ha, Λ=459.24Ha (Λ_1=5.706, Λ_2=453.5), cost = 97.6mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.87
+1158.8s 119 Saved optimized solution to /kaggle/working/runs/S8_stage1.npz
+1163.1s 120 built /kaggle/working/builds/S8_stage1_b10/dfthcsos: R,B,C=8,143,44 brot=10 J=10  e1=7.28 e2=74.18 mHa lam_eff=65.8059
+1167.3s 121 built /kaggle/working/builds/S8_stage1_b11/dfthcsos: R,B,C=8,143,44 brot=11 J=9  e1=3.66 e2=58.77 mHa lam_eff=62.0663
+1171.5s 122 built /kaggle/working/builds/S8_stage1_b12/dfthcsos: R,B,C=8,143,44 brot=12 J=8  e1=1.62 e2=54.37 mHa lam_eff=60.5401
+1175.7s 123 built /kaggle/working/builds/S8_stage1_b13/dfthcsos: R,B,C=8,143,44 brot=13 J=8  e1=0.84 e2=53.10 mHa lam_eff=60.1308
+1175.7s 124 {
+1175.7s 125 "name": "S8_stage1",
+1175.7s 126 "rank": 8,
+1175.7s 127 "bases": 143,
+1175.7s 128 "copies": 44,
+1175.7s 129 "epochs": 100000,
+1175.7s 130 "lr": 0.001,
+1175.7s 131 "rho": 0.001,
+1175.7s 132 "epsilon_dfthc": 0.015,
+1175.7s 133 "train_seconds": 1120,
+1175.7s 134 "b10_local": {
+1175.7s 135 "error_1": 0.007276636535960883,
+1175.7s 136 "error_2": 0.07418242326668299,
+1175.7s 137 "Lambda": 460.1042628900761,
+1175.7s 138 "E_gap": 4.7302259042880905,
+1175.7s 139 "lambda_eff": 65.80592046986679
+1175.7s 140 },
+1175.7s 141 "b11_local": {
+1175.7s 142 "error_1": 0.0036556585065183494,
+1175.7s 143 "error_2": 0.05877143595556864,
+1175.7s 144 "Lambda": 459.56070937823995,
+1175.7s 145 "E_gap": 4.210493242022494,
+1175.7s 146 "lambda_eff": 62.06630542356431
+1175.7s 147 },
+1175.7s 148 "b12_local": {
+1175.7s 149 "error_1": 0.0016202032548509853,
+1175.7s 150 "error_2": 0.05437003511823576,
+1175.7s 151 "Lambda": 459.34536350538167,
+1175.7s 152 "E_gap": 4.006964983211219,
+1175.7s 153 "lambda_eff": 60.54011732030509
+1175.7s 154 },
+1175.7s 155 "b13_local": {
+1175.7s 156 "error_1": 0.0008443653359942811,
+1175.7s 157 "error_2": 0.053104143330181944,
+1175.7s 158 "Lambda": 459.285288111131,
+1175.7s 159 "E_gap": 3.9532471569109475,
+1175.7s 160 "lambda_eff": 60.13076047905168
+1175.7s 161 },
+1175.7s 162 "status": "NO_PRECISION_PASSES"
+1175.7s 163 }
+1175.7s 164 S8_stage1      status=NO_PRECISION_PASSES  brot=None improvement=nan
+1175.7s 165 No verified result yet: submission.zip not written.
+1175.9s 166 === S8: seed S8_stage1.npz, {'rank': 8, 'bases': 143, 'copies': 44, 'epochs': 200000, 'lr': 0.0001, 'rho': 0.0001, 'epsilon_dfthc': 0.012}
+1197.1s 167 Seeding parameters from /kaggle/working/runs/S8_stage1.npz
+1197.1s 168 Training U/V (8, 143, 76) and W (8, 143, 44) with generators None for 200000 epochs with DF-THC-SOS.
+1200.7s 169 B@epoch 0: ε_fro=50.3mHa, λ_eff=76.32Ha, Λ=461.33Ha (Λ_1=7.371, Λ_2=454.0), cost = 45.9mHa, E_SOS: -22146.631Ha, gap: 6.3574Ha, ms/it: 3.63
+1211.6s 170 B@epoch 1000: ε_fro=44.4mHa, λ_eff=73.41Ha, Λ=464.60Ha (Λ_1=7.725, Λ_2=456.9), cost = 39.7mHa, E_SOS: -22146.109Ha, gap: 5.8359Ha, ms/it: 10.90
+1223.2s 171 B@epoch 2000: ε_fro=43.1mHa, λ_eff=72.60Ha, Λ=465.12Ha (Λ_1=7.994, Λ_2=457.1), cost = 38.3mHa, E_SOS: -22145.975Ha, gap: 5.7012Ha, ms/it: 11.53
+1235.1s 172 B@epoch 3000: ε_fro=42.1mHa, λ_eff=71.56Ha, Λ=464.74Ha (Λ_1=8.237, Λ_2=456.5), cost = 37.3mHa, E_SOS: -22145.816Ha, gap: 5.5430Ha, ms/it: 11.93
+1246.3s 173 B@epoch 4000: ε_fro=41.5mHa, λ_eff=70.53Ha, Λ=464.06Ha (Λ_1=8.475, Λ_2=455.6), cost = 36.5mHa, E_SOS: -22145.664Ha, gap: 5.3906Ha, ms/it: 11.23
+1257.2s 174 B@epoch 5000: ε_fro=40.9mHa, λ_eff=69.41Ha, Λ=463.29Ha (Λ_1=8.700, Λ_2=454.6), cost = 35.8mHa, E_SOS: -22145.502Ha, gap: 5.2285Ha, ms/it: 10.84
+1267.8s 175 B@epoch 6000: ε_fro=40.4mHa, λ_eff=68.20Ha, Λ=462.43Ha (Λ_1=8.926, Λ_2=453.5), cost = 35.2mHa, E_SOS: -22145.330Ha, gap: 5.0566Ha, ms/it: 10.68
+1278.5s 176 B@epoch 7000: ε_fro=40.0mHa, λ_eff=67.45Ha, Λ=461.51Ha (Λ_1=9.161, Λ_2=452.4), cost = 34.7mHa, E_SOS: -22145.229Ha, gap: 4.9551Ha, ms/it: 10.68
+1289.4s 177 B@epoch 8000: ε_fro=39.5mHa, λ_eff=66.51Ha, Λ=460.53Ha (Λ_1=9.381, Λ_2=451.1), cost = 34.2mHa, E_SOS: -22145.102Ha, gap: 4.8281Ha, ms/it: 10.83
+1300.4s 178 B@epoch 9000: ε_fro=39.2mHa, λ_eff=65.66Ha, Λ=459.51Ha (Λ_1=9.581, Λ_2=449.9), cost = 33.8mHa, E_SOS: -22144.988Ha, gap: 4.7148Ha, ms/it: 11.03
+1311.5s 179 B@epoch 10000: ε_fro=38.8mHa, λ_eff=64.82Ha, Λ=458.39Ha (Λ_1=9.782, Λ_2=448.6), cost = 33.3mHa, E_SOS: -22144.879Ha, gap: 4.6055Ha, ms/it: 11.13
+1322.6s 180 B@epoch 11000: ε_fro=38.5mHa, λ_eff=63.94Ha, Λ=457.27Ha (Λ_1=9.951, Λ_2=447.3), cost = 32.9mHa, E_SOS: -22144.766Ha, gap: 4.4922Ha, ms/it: 11.09
+1333.6s 181 B@epoch 12000: ε_fro=38.2mHa, λ_eff=63.35Ha, Λ=456.14Ha (Λ_1=10.118, Λ_2=446.0), cost = 32.6mHa, E_SOS: -22144.693Ha, gap: 4.4199Ha, ms/it: 11.01
+1344.6s 182 B@epoch 13000: ε_fro=38.0mHa, λ_eff=62.65Ha, Λ=454.97Ha (Λ_1=10.289, Λ_2=444.7), cost = 32.2mHa, E_SOS: -22144.607Ha, gap: 4.3340Ha, ms/it: 10.94
+1355.4s 183 B@epoch 14000: ε_fro=37.7mHa, λ_eff=62.43Ha, Λ=453.81Ha (Λ_1=10.469, Λ_2=443.3), cost = 31.9mHa, E_SOS: -22144.588Ha, gap: 4.3145Ha, ms/it: 10.88
+1366.4s 184 B@epoch 15000: ε_fro=37.4mHa, λ_eff=62.00Ha, Λ=452.71Ha (Λ_1=10.601, Λ_2=442.1), cost = 31.6mHa, E_SOS: -22144.539Ha, gap: 4.2656Ha, ms/it: 10.96
+1377.3s 185 B@epoch 16000: ε_fro=37.2mHa, λ_eff=61.50Ha, Λ=451.42Ha (Λ_1=10.742, Λ_2=440.7), cost = 31.4mHa, E_SOS: -22144.482Ha, gap: 4.2090Ha, ms/it: 10.93
+1388.4s 186 B@epoch 17000: ε_fro=37.0mHa, λ_eff=61.14Ha, Λ=450.27Ha (Λ_1=10.862, Λ_2=439.4), cost = 31.1mHa, E_SOS: -22144.443Ha, gap: 4.1699Ha, ms/it: 11.02
+1399.3s 187 B@epoch 18000: ε_fro=36.8mHa, λ_eff=60.73Ha, Λ=448.93Ha (Λ_1=10.986, Λ_2=437.9), cost = 30.9mHa, E_SOS: -22144.400Ha, gap: 4.1270Ha, ms/it: 10.96
+1410.3s 188 B@epoch 19000: ε_fro=36.6mHa, λ_eff=60.43Ha, Λ=447.66Ha (Λ_1=11.098, Λ_2=436.6), cost = 30.7mHa, E_SOS: -22144.371Ha, gap: 4.0977Ha, ms/it: 10.93
+1421.2s 189 B@epoch 20000: ε_fro=36.4mHa, λ_eff=59.96Ha, Λ=446.36Ha (Λ_1=11.204, Λ_2=435.2), cost = 30.4mHa, E_SOS: -22144.318Ha, gap: 4.0449Ha, ms/it: 10.96
+1432.3s 190 B@epoch 21000: ε_fro=36.3mHa, λ_eff=59.79Ha, Λ=445.03Ha (Λ_1=11.309, Λ_2=433.7), cost = 30.2mHa, E_SOS: -22144.309Ha, gap: 4.0352Ha, ms/it: 11.05
+1443.3s 191 B@epoch 22000: ε_fro=36.1mHa, λ_eff=59.66Ha, Λ=443.71Ha (Λ_1=11.413, Λ_2=432.3), cost = 30.0mHa, E_SOS: -22144.303Ha, gap: 4.0293Ha, ms/it: 10.99
+1454.3s 192 B@epoch 23000: ε_fro=35.9mHa, λ_eff=59.29Ha, Λ=442.52Ha (Λ_1=11.470, Λ_2=431.0), cost = 29.9mHa, E_SOS: -22144.264Ha, gap: 3.9902Ha, ms/it: 11.06
+1465.4s 193 B@epoch 24000: ε_fro=35.8mHa, λ_eff=58.92Ha, Λ=441.30Ha (Λ_1=11.541, Λ_2=429.8), cost = 29.7mHa, E_SOS: -22144.225Ha, gap: 3.9512Ha, ms/it: 11.10
+1476.5s 194 epoch 25000: ε_fro=37.2mHa, λ_eff=82.20Ha, Λ=462.75Ha (Λ_1=14.537, Λ_2=448.2), cost = 33.4mHa, E_SOS: -22147.633Ha, gap: 7.3594Ha, ms/it: 11.11
+1487.6s 195 epoch 26000: ε_fro=36.3mHa, λ_eff=70.42Ha, Λ=457.16Ha (Λ_1=12.890, Λ_2=444.3), cost = 31.3mHa, E_SOS: -22145.730Ha, gap: 5.4570Ha, ms/it: 11.07
+1498.7s 196 epoch 27000: ε_fro=36.0mHa, λ_eff=63.08Ha, Λ=452.76Ha (Λ_1=12.045, Λ_2=440.7), cost = 30.3mHa, E_SOS: -22144.689Ha, gap: 4.4160Ha, ms/it: 11.11
+1509.8s 197 epoch 28000: ε_fro=35.8mHa, λ_eff=60.08Ha, Λ=449.90Ha (Λ_1=11.672, Λ_2=438.2), cost = 29.8mHa, E_SOS: -22144.303Ha, gap: 4.0293Ha, ms/it: 11.11
+1520.9s 198 B@epoch 29000: ε_fro=35.7mHa, λ_eff=59.55Ha, Λ=448.33Ha (Λ_1=11.590, Λ_2=436.7), cost = 29.7mHa, E_SOS: -22144.246Ha, gap: 3.9727Ha, ms/it: 11.07
+1532.0s 199 B@epoch 30000: ε_fro=35.6mHa, λ_eff=59.36Ha, Λ=446.92Ha (Λ_1=11.631, Λ_2=435.3), cost = 29.6mHa, E_SOS: -22144.232Ha, gap: 3.9590Ha, ms/it: 11.12
+1543.1s 200 B@epoch 31000: ε_fro=35.5mHa, λ_eff=59.05Ha, Λ=445.39Ha (Λ_1=11.695, Λ_2=433.7), cost = 29.4mHa, E_SOS: -22144.205Ha, gap: 3.9316Ha, ms/it: 11.13
+1554.3s 201 B@epoch 32000: ε_fro=35.5mHa, λ_eff=58.93Ha, Λ=445.16Ha (Λ_1=11.700, Λ_2=433.5), cost = 29.4mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.13
+1565.4s 202 epoch 33000: ε_fro=35.9mHa, λ_eff=70.22Ha, Λ=455.06Ha (Λ_1=12.928, Λ_2=442.1), cost = 31.0mHa, E_SOS: -22145.725Ha, gap: 5.4512Ha, ms/it: 11.13
+1576.5s 203 epoch 34000: ε_fro=35.7mHa, λ_eff=62.91Ha, Λ=451.17Ha (Λ_1=12.147, Λ_2=439.0), cost = 30.0mHa, E_SOS: -22144.682Ha, gap: 4.4082Ha, ms/it: 11.11
+1587.6s 204 epoch 35000: ε_fro=35.5mHa, λ_eff=59.69Ha, Λ=448.81Ha (Λ_1=11.827, Λ_2=437.0), cost = 29.5mHa, E_SOS: -22144.260Ha, gap: 3.9863Ha, ms/it: 11.13
+1598.7s 205 B@epoch 36000: ε_fro=35.5mHa, λ_eff=59.11Ha, Λ=447.63Ha (Λ_1=11.765, Λ_2=435.9), cost = 29.4mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.10
+1609.8s 206 epoch 37000: ε_fro=36.3mHa, λ_eff=76.43Ha, Λ=458.47Ha (Λ_1=13.851, Λ_2=444.6), cost = 32.0mHa, E_SOS: -22146.689Ha, gap: 6.4160Ha, ms/it: 11.03
+1620.8s 207 epoch 38000: ε_fro=35.7mHa, λ_eff=67.24Ha, Λ=454.33Ha (Λ_1=12.487, Λ_2=441.8), cost = 30.4mHa, E_SOS: -22145.277Ha, gap: 5.0039Ha, ms/it: 11.05
+1631.9s 208 epoch 39000: ε_fro=35.5mHa, λ_eff=61.59Ha, Λ=451.06Ha (Λ_1=11.915, Λ_2=439.1), cost = 29.7mHa, E_SOS: -22144.498Ha, gap: 4.2246Ha, ms/it: 11.11
+1643.0s 209 epoch 40000: ε_fro=35.4mHa, λ_eff=59.46Ha, Λ=449.16Ha (Λ_1=11.797, Λ_2=437.4), cost = 29.4mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 11.08
+1654.1s 210 B@epoch 41000: ε_fro=35.4mHa, λ_eff=59.14Ha, Λ=448.35Ha (Λ_1=11.797, Λ_2=436.6), cost = 29.3mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.08
+1665.2s 211 epoch 42000: ε_fro=35.9mHa, λ_eff=70.70Ha, Λ=455.60Ha (Λ_1=13.059, Λ_2=442.5), cost = 31.0mHa, E_SOS: -22145.793Ha, gap: 5.5195Ha, ms/it: 11.09
+1676.2s 212 epoch 43000: ε_fro=35.6mHa, λ_eff=64.49Ha, Λ=452.50Ha (Λ_1=12.307, Λ_2=440.2), cost = 30.0mHa, E_SOS: -22144.893Ha, gap: 4.6191Ha, ms/it: 11.06
+1687.3s 213 epoch 44000: ε_fro=35.4mHa, λ_eff=60.67Ha, Λ=450.15Ha (Λ_1=11.963, Λ_2=438.2), cost = 29.5mHa, E_SOS: -22144.381Ha, gap: 4.1074Ha, ms/it: 11.05
+1698.3s 214 B@epoch 45000: ε_fro=35.4mHa, λ_eff=59.29Ha, Λ=448.80Ha (Λ_1=11.854, Λ_2=436.9), cost = 29.3mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 11.06
+1709.4s 215 B@epoch 46000: ε_fro=35.3mHa, λ_eff=59.15Ha, Λ=448.49Ha (Λ_1=11.843, Λ_2=436.7), cost = 29.3mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.04
+1720.5s 216 epoch 47000: ε_fro=35.6mHa, λ_eff=63.69Ha, Λ=451.54Ha (Λ_1=12.201, Λ_2=439.3), cost = 30.0mHa, E_SOS: -22144.787Ha, gap: 4.5137Ha, ms/it: 11.07
+1731.5s 217 epoch 48000: ε_fro=35.4mHa, λ_eff=60.50Ha, Λ=449.79Ha (Λ_1=11.948, Λ_2=437.8), cost = 29.5mHa, E_SOS: -22144.361Ha, gap: 4.0879Ha, ms/it: 11.06
+1742.6s 218 epoch 49000: ε_fro=35.3mHa, λ_eff=59.30Ha, Λ=448.76Ha (Λ_1=11.872, Λ_2=436.9), cost = 29.3mHa, E_SOS: -22144.209Ha, gap: 3.9355Ha, ms/it: 11.07
+1753.7s 219 B@epoch 50000: ε_fro=35.3mHa, λ_eff=59.14Ha, Λ=448.50Ha (Λ_1=11.859, Λ_2=436.6), cost = 29.2mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+1764.7s 220 epoch 51000: ε_fro=35.4mHa, λ_eff=63.45Ha, Λ=451.94Ha (Λ_1=12.099, Λ_2=439.8), cost = 29.8mHa, E_SOS: -22144.750Ha, gap: 4.4766Ha, ms/it: 11.05
+1775.8s 221 epoch 52000: ε_fro=35.3mHa, λ_eff=60.59Ha, Λ=450.18Ha (Λ_1=11.891, Λ_2=438.3), cost = 29.4mHa, E_SOS: -22144.369Ha, gap: 4.0957Ha, ms/it: 11.05
+1786.8s 222 epoch 53000: ε_fro=35.3mHa, λ_eff=59.35Ha, Λ=449.06Ha (Λ_1=11.845, Λ_2=437.2), cost = 29.2mHa, E_SOS: -22144.213Ha, gap: 3.9395Ha, ms/it: 11.03
+1797.9s 223 B@epoch 54000: ε_fro=35.3mHa, λ_eff=59.16Ha, Λ=448.77Ha (Λ_1=11.843, Λ_2=436.9), cost = 29.2mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+1808.9s 224 epoch 55000: ε_fro=35.4mHa, λ_eff=62.09Ha, Λ=451.61Ha (Λ_1=12.040, Λ_2=439.6), cost = 29.6mHa, E_SOS: -22144.562Ha, gap: 4.2891Ha, ms/it: 11.05
+1820.0s 225 epoch 56000: ε_fro=35.3mHa, λ_eff=60.02Ha, Λ=450.18Ha (Λ_1=11.881, Λ_2=438.3), cost = 29.3mHa, E_SOS: -22144.293Ha, gap: 4.0195Ha, ms/it: 11.04
+1831.0s 226 B@epoch 57000: ε_fro=35.3mHa, λ_eff=59.22Ha, Λ=449.26Ha (Λ_1=11.850, Λ_2=437.4), cost = 29.2mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.07
+1842.1s 227 B@epoch 58000: ε_fro=35.3mHa, λ_eff=59.19Ha, Λ=449.22Ha (Λ_1=11.850, Λ_2=437.4), cost = 29.2mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+1853.2s 228 epoch 59000: ε_fro=35.3mHa, λ_eff=60.39Ha, Λ=450.40Ha (Λ_1=11.986, Λ_2=438.4), cost = 29.4mHa, E_SOS: -22144.340Ha, gap: 4.0664Ha, ms/it: 11.09
+1864.2s 229 epoch 60000: ε_fro=35.3mHa, λ_eff=59.39Ha, Λ=449.61Ha (Λ_1=11.906, Λ_2=437.7), cost = 29.2mHa, E_SOS: -22144.213Ha, gap: 3.9395Ha, ms/it: 11.07
+1875.3s 230 B@epoch 61000: ε_fro=35.3mHa, λ_eff=59.20Ha, Λ=449.38Ha (Λ_1=11.894, Λ_2=437.5), cost = 29.2mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+1886.3s 231 epoch 62000: ε_fro=35.3mHa, λ_eff=60.70Ha, Λ=450.31Ha (Λ_1=11.983, Λ_2=438.3), cost = 29.4mHa, E_SOS: -22144.383Ha, gap: 4.1094Ha, ms/it: 11.06
+1897.4s 232 epoch 63000: ε_fro=35.3mHa, λ_eff=59.56Ha, Λ=449.57Ha (Λ_1=11.864, Λ_2=437.7), cost = 29.2mHa, E_SOS: -22144.236Ha, gap: 3.9629Ha, ms/it: 11.10
+1908.5s 233 B@epoch 64000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.12Ha (Λ_1=11.858, Λ_2=437.3), cost = 29.2mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+1919.6s 234 epoch 65000: ε_fro=35.4mHa, λ_eff=61.00Ha, Λ=450.59Ha (Λ_1=12.047, Λ_2=438.5), cost = 29.5mHa, E_SOS: -22144.422Ha, gap: 4.1484Ha, ms/it: 11.09
+1930.7s 235 epoch 66000: ε_fro=35.3mHa, λ_eff=59.79Ha, Λ=449.87Ha (Λ_1=11.939, Λ_2=437.9), cost = 29.2mHa, E_SOS: -22144.264Ha, gap: 3.9902Ha, ms/it: 11.06
+1941.8s 236 B@epoch 67000: ε_fro=35.2mHa, λ_eff=59.22Ha, Λ=449.33Ha (Λ_1=11.908, Λ_2=437.4), cost = 29.2mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.10
+1952.8s 237 B@epoch 68000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.28Ha (Λ_1=11.906, Λ_2=437.4), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+1963.9s 238 epoch 69000: ε_fro=35.3mHa, λ_eff=60.26Ha, Λ=450.52Ha (Λ_1=12.038, Λ_2=438.5), cost = 29.3mHa, E_SOS: -22144.322Ha, gap: 4.0488Ha, ms/it: 11.05
+1975.0s 239 epoch 70000: ε_fro=35.2mHa, λ_eff=59.44Ha, Λ=449.80Ha (Λ_1=11.972, Λ_2=437.8), cost = 29.2mHa, E_SOS: -22144.219Ha, gap: 3.9453Ha, ms/it: 11.07
+1986.0s 240 B@epoch 71000: ε_fro=35.2mHa, λ_eff=59.20Ha, Λ=449.48Ha (Λ_1=11.960, Λ_2=437.5), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+1997.1s 241 epoch 72000: ε_fro=35.2mHa, λ_eff=59.71Ha, Λ=449.86Ha (Λ_1=12.003, Λ_2=437.9), cost = 29.2mHa, E_SOS: -22144.254Ha, gap: 3.9805Ha, ms/it: 11.10
+2008.2s 242 epoch 73000: ε_fro=35.2mHa, λ_eff=59.29Ha, Λ=449.47Ha (Λ_1=11.972, Λ_2=437.5), cost = 29.1mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.10
+2019.3s 243 B@epoch 74000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.33Ha (Λ_1=11.967, Λ_2=437.4), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.13
+2030.4s 244 epoch 75000: ε_fro=35.2mHa, λ_eff=59.82Ha, Λ=449.75Ha (Λ_1=12.022, Λ_2=437.7), cost = 29.2mHa, E_SOS: -22144.270Ha, gap: 3.9961Ha, ms/it: 11.08
+2041.5s 245 epoch 76000: ε_fro=35.2mHa, λ_eff=59.31Ha, Λ=449.32Ha (Λ_1=11.983, Λ_2=437.3), cost = 29.1mHa, E_SOS: -22144.205Ha, gap: 3.9316Ha, ms/it: 11.07
+2052.6s 246 B@epoch 77000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.18Ha (Λ_1=11.976, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2063.6s 247 epoch 78000: ε_fro=35.2mHa, λ_eff=59.39Ha, Λ=449.35Ha (Λ_1=11.991, Λ_2=437.4), cost = 29.1mHa, E_SOS: -22144.215Ha, gap: 3.9414Ha, ms/it: 11.05
+2074.7s 248 B@epoch 79000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.12Ha (Λ_1=11.980, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2085.8s 249 epoch 80000: ε_fro=35.2mHa, λ_eff=59.26Ha, Λ=449.27Ha (Λ_1=11.972, Λ_2=437.3), cost = 29.1mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.07
+2096.8s 250 B@epoch 81000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.16Ha (Λ_1=11.970, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2107.9s 251 epoch 82000: ε_fro=35.3mHa, λ_eff=60.86Ha, Λ=449.60Ha (Λ_1=12.221, Λ_2=437.4), cost = 29.3mHa, E_SOS: -22144.412Ha, gap: 4.1387Ha, ms/it: 11.06
+2118.9s 252 epoch 83000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.22Ha (Λ_1=12.012, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2130.0s 253 epoch 84000: ε_fro=35.2mHa, λ_eff=59.22Ha, Λ=449.34Ha (Λ_1=12.004, Λ_2=437.3), cost = 29.1mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.05
+2141.1s 254 B@epoch 85000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.27Ha (Λ_1=12.002, Λ_2=437.3), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2152.1s 255 B@epoch 86000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.21Ha (Λ_1=12.019, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2163.1s 256 epoch 87000: ε_fro=35.2mHa, λ_eff=59.20Ha, Λ=449.21Ha (Λ_1=12.037, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.00
+2174.2s 257 B@epoch 88000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.17Ha (Λ_1=12.035, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2185.2s 258 B@epoch 89000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.21Ha (Λ_1=12.020, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2196.3s 259 B@epoch 90000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.21Ha (Λ_1=12.014, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.04
+2207.4s 260 B@epoch 91000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.19Ha (Λ_1=12.014, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+2218.5s 261 B@epoch 92000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.19Ha (Λ_1=12.030, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2229.6s 262 B@epoch 93000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.16Ha (Λ_1=12.018, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2240.6s 263 epoch 94000: ε_fro=35.2mHa, λ_eff=59.21Ha, Λ=449.17Ha (Λ_1=12.012, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.08
+2251.7s 264 B@epoch 95000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.14Ha (Λ_1=12.010, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2262.8s 265 B@epoch 96000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.18Ha (Λ_1=12.001, Λ_2=437.2), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2273.8s 266 B@epoch 97000: ε_fro=35.2mHa, λ_eff=59.19Ha, Λ=449.12Ha (Λ_1=12.002, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.08
+2284.9s 267 B@epoch 98000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.10Ha (Λ_1=12.002, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2295.9s 268 B@epoch 99000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.12Ha (Λ_1=12.020, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2307.0s 269 epoch 100000: ε_fro=35.2mHa, λ_eff=59.23Ha, Λ=449.15Ha (Λ_1=12.016, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.195Ha, gap: 3.9219Ha, ms/it: 11.09
+2318.1s 270 B@epoch 101000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.10Ha (Λ_1=12.012, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2329.2s 271 B@epoch 102000: ε_fro=35.2mHa, λ_eff=59.18Ha, Λ=449.11Ha (Λ_1=12.000, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2340.2s 272 epoch 103000: ε_fro=35.2mHa, λ_eff=59.21Ha, Λ=449.08Ha (Λ_1=12.005, Λ_2=437.1), cost = 29.1mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.08
+2351.3s 273 B@epoch 104000: ε_fro=35.2mHa, λ_eff=59.17Ha, Λ=449.05Ha (Λ_1=12.004, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2362.4s 274 B@epoch 105000: ε_fro=35.2mHa, λ_eff=59.17Ha, Λ=449.05Ha (Λ_1=12.001, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2373.6s 275 B@epoch 106000: ε_fro=35.2mHa, λ_eff=59.17Ha, Λ=449.04Ha (Λ_1=12.003, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2384.6s 276 B@epoch 107000: ε_fro=35.2mHa, λ_eff=59.17Ha, Λ=449.04Ha (Λ_1=12.003, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2395.6s 277 B@epoch 108000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.99Ha (Λ_1=12.012, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2406.7s 278 epoch 109000: ε_fro=35.1mHa, λ_eff=59.19Ha, Λ=448.99Ha (Λ_1=12.026, Λ_2=437.0), cost = 29.1mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.04
+2417.7s 279 B@epoch 110000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.97Ha (Λ_1=12.025, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2428.8s 280 B@epoch 111000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.95Ha (Λ_1=12.033, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2439.9s 281 B@epoch 112000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.93Ha (Λ_1=12.023, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2450.9s 282 B@epoch 113000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.93Ha (Λ_1=12.023, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2462.0s 283 B@epoch 114000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.91Ha (Λ_1=12.015, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+2473.1s 284 epoch 115000: ε_fro=35.1mHa, λ_eff=59.18Ha, Λ=448.90Ha (Λ_1=12.022, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.07
+2484.2s 285 B@epoch 116000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.88Ha (Λ_1=12.020, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.12
+2495.3s 286 B@epoch 117000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.87Ha (Λ_1=12.017, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2506.4s 287 B@epoch 118000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.86Ha (Λ_1=12.011, Λ_2=436.8), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2517.5s 288 epoch 119000: ε_fro=35.1mHa, λ_eff=59.24Ha, Λ=448.86Ha (Λ_1=12.014, Λ_2=436.9), cost = 29.1mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.10
+2528.6s 289 B@epoch 120000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.81Ha (Λ_1=12.008, Λ_2=436.8), cost = 29.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2539.6s 290 B@epoch 121000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.80Ha (Λ_1=12.005, Λ_2=436.8), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2550.7s 291 epoch 122000: ε_fro=35.1mHa, λ_eff=59.26Ha, Λ=448.82Ha (Λ_1=12.023, Λ_2=436.8), cost = 29.1mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 11.07
+2561.7s 292 B@epoch 123000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.78Ha (Λ_1=12.010, Λ_2=436.8), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+2572.7s 293 B@epoch 124000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.77Ha (Λ_1=12.008, Λ_2=436.8), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.00
+2583.8s 294 epoch 125000: ε_fro=35.1mHa, λ_eff=59.24Ha, Λ=448.78Ha (Λ_1=12.012, Λ_2=436.8), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.02
+2594.8s 295 B@epoch 126000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.74Ha (Λ_1=12.004, Λ_2=436.7), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.04
+2605.8s 296 B@epoch 127000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.72Ha (Λ_1=12.012, Λ_2=436.7), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.00
+2616.8s 297 B@epoch 128000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.71Ha (Λ_1=12.009, Λ_2=436.7), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.01
+2627.8s 298 B@epoch 129000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.70Ha (Λ_1=12.012, Λ_2=436.7), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.02
+2638.9s 299 B@epoch 130000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.67Ha (Λ_1=12.016, Λ_2=436.7), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.03
+2649.9s 300 B@epoch 131000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.66Ha (Λ_1=12.014, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2661.0s 301 B@epoch 132000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.65Ha (Λ_1=12.009, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2672.0s 302 B@epoch 133000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.64Ha (Λ_1=12.004, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.03
+2683.0s 303 B@epoch 134000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.64Ha (Λ_1=12.003, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.02
+2694.1s 304 B@epoch 135000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.61Ha (Λ_1=12.002, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.02
+2705.1s 305 epoch 136000: ε_fro=35.1mHa, λ_eff=59.22Ha, Λ=448.62Ha (Λ_1=12.007, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.03
+2716.2s 306 B@epoch 137000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.60Ha (Λ_1=12.000, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2727.3s 307 B@epoch 138000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.57Ha (Λ_1=11.999, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+2738.3s 308 epoch 139000: ε_fro=35.1mHa, λ_eff=59.23Ha, Λ=448.58Ha (Λ_1=12.008, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.06
+2749.4s 309 B@epoch 140000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.55Ha (Λ_1=12.000, Λ_2=436.6), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2760.5s 310 B@epoch 141000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.53Ha (Λ_1=12.000, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2771.5s 311 epoch 142000: ε_fro=35.1mHa, λ_eff=59.30Ha, Λ=448.54Ha (Λ_1=12.022, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.211Ha, gap: 3.9375Ha, ms/it: 11.02
+2782.6s 312 B@epoch 143000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.50Ha (Λ_1=12.002, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2793.7s 313 B@epoch 144000: ε_fro=35.1mHa, λ_eff=59.17Ha, Λ=448.49Ha (Λ_1=12.004, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.11
+2804.8s 314 B@epoch 145000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.48Ha (Λ_1=12.000, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2815.8s 315 B@epoch 146000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.46Ha (Λ_1=12.004, Λ_2=436.5), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+2826.9s 316 B@epoch 147000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.45Ha (Λ_1=12.006, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.05
+2838.0s 317 B@epoch 148000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.45Ha (Λ_1=12.002, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+2849.1s 318 B@epoch 149000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.43Ha (Λ_1=12.000, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.10
+2860.2s 319 epoch 150000: ε_fro=35.1mHa, λ_eff=59.24Ha, Λ=448.43Ha (Λ_1=12.011, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 11.14
+2871.4s 320 B@epoch 151000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.41Ha (Λ_1=12.002, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.11
+2882.4s 321 B@epoch 152000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.39Ha (Λ_1=12.000, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+2893.5s 322 epoch 153000: ε_fro=35.1mHa, λ_eff=59.34Ha, Λ=448.41Ha (Λ_1=12.022, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.217Ha, gap: 3.9434Ha, ms/it: 11.12
+2904.6s 323 B@epoch 154000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.37Ha (Λ_1=12.001, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.08
+2915.7s 324 epoch 155000: ε_fro=35.1mHa, λ_eff=59.19Ha, Λ=448.36Ha (Λ_1=12.003, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.197Ha, gap: 3.9238Ha, ms/it: 11.09
+2926.8s 325 B@epoch 156000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.36Ha (Λ_1=12.001, Λ_2=436.4), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.12
+2937.9s 326 B@epoch 157000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.33Ha (Λ_1=12.002, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+2949.0s 327 epoch 158000: ε_fro=35.1mHa, λ_eff=59.23Ha, Λ=448.33Ha (Λ_1=12.015, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 11.10
+2960.1s 328 B@epoch 159000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.32Ha (Λ_1=12.003, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2971.1s 329 B@epoch 160000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.30Ha (Λ_1=12.003, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.01
+2982.2s 330 B@epoch 161000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.30Ha (Λ_1=12.001, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.08
+2993.3s 331 B@epoch 162000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.28Ha (Λ_1=12.005, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.12
+3004.4s 332 epoch 163000: ε_fro=35.1mHa, λ_eff=59.21Ha, Λ=448.28Ha (Λ_1=12.012, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.10
+3015.5s 333 B@epoch 164000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.27Ha (Λ_1=12.002, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.10
+3026.6s 334 B@epoch 165000: ε_fro=35.1mHa, λ_eff=59.14Ha, Λ=448.25Ha (Λ_1=12.002, Λ_2=436.3), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.12
+3037.7s 335 B@epoch 166000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.25Ha (Λ_1=12.000, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.07
+3048.8s 336 B@epoch 167000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.24Ha (Λ_1=11.999, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.14
+3059.9s 337 epoch 168000: ε_fro=35.1mHa, λ_eff=59.21Ha, Λ=448.24Ha (Λ_1=12.008, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.09
+3071.1s 338 B@epoch 169000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.22Ha (Λ_1=11.998, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.12
+3082.2s 339 B@epoch 170000: ε_fro=35.1mHa, λ_eff=59.15Ha, Λ=448.21Ha (Λ_1=12.000, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 11.11
+3093.3s 340 B@epoch 171000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.21Ha (Λ_1=11.996, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+3104.3s 341 B@epoch 172000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.19Ha (Λ_1=11.994, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+3115.4s 342 epoch 173000: ε_fro=35.1mHa, λ_eff=59.35Ha, Λ=448.22Ha (Λ_1=12.023, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.221Ha, gap: 3.9473Ha, ms/it: 11.07
+3126.4s 343 B@epoch 174000: ε_fro=35.1mHa, λ_eff=59.12Ha, Λ=448.18Ha (Λ_1=11.996, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.02
+3137.4s 344 epoch 175000: ε_fro=35.1mHa, λ_eff=59.25Ha, Λ=448.18Ha (Λ_1=12.009, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 11.03
+3148.5s 345 epoch 176000: ε_fro=35.0mHa, λ_eff=60.82Ha, Λ=448.36Ha (Λ_1=12.186, Λ_2=436.2), cost = 29.1mHa, E_SOS: -22144.418Ha, gap: 4.1445Ha, ms/it: 11.02
+3159.5s 346 epoch 177000: ε_fro=35.1mHa, λ_eff=59.19Ha, Λ=448.16Ha (Λ_1=12.003, Λ_2=436.2), cost = 29.0mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.07
+3170.6s 347 B@epoch 178000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.14Ha (Λ_1=11.996, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.04
+3181.6s 348 epoch 179000: ε_fro=35.1mHa, λ_eff=59.16Ha, Λ=448.14Ha (Λ_1=11.999, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.195Ha, gap: 3.9219Ha, ms/it: 11.06
+3192.7s 349 B@epoch 180000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.13Ha (Λ_1=11.994, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+3203.7s 350 B@epoch 181000: ε_fro=35.1mHa, λ_eff=59.13Ha, Λ=448.12Ha (Λ_1=11.999, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 11.02
+3214.8s 351 B@epoch 182000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.11Ha (Λ_1=11.997, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+3225.8s 352 B@epoch 183000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.10Ha (Λ_1=11.997, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+3236.9s 353 epoch 184000: ε_fro=35.1mHa, λ_eff=59.32Ha, Λ=448.12Ha (Λ_1=12.023, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.217Ha, gap: 3.9434Ha, ms/it: 11.07
+3248.0s 354 B@epoch 185000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.09Ha (Λ_1=11.998, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.10
+3259.1s 355 epoch 186000: ε_fro=35.1mHa, λ_eff=59.26Ha, Λ=448.10Ha (Λ_1=12.015, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.209Ha, gap: 3.9355Ha, ms/it: 11.11
+3270.2s 356 B@epoch 187000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.07Ha (Λ_1=11.997, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.05
+3281.2s 357 epoch 188000: ε_fro=35.1mHa, λ_eff=59.23Ha, Λ=448.08Ha (Λ_1=12.011, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.205Ha, gap: 3.9316Ha, ms/it: 11.08
+3292.3s 358 B@epoch 189000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.06Ha (Λ_1=11.998, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.06
+3303.4s 359 epoch 190000: ε_fro=35.1mHa, λ_eff=59.20Ha, Λ=448.06Ha (Λ_1=12.008, Λ_2=436.1), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.11
+3314.5s 360 B@epoch 191000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.05Ha (Λ_1=11.998, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.10
+3325.6s 361 epoch 192000: ε_fro=35.1mHa, λ_eff=59.20Ha, Λ=448.05Ha (Λ_1=12.006, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.07
+3336.7s 362 B@epoch 193000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.03Ha (Λ_1=11.998, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.09
+3347.7s 363 epoch 194000: ε_fro=35.1mHa, λ_eff=59.18Ha, Λ=448.03Ha (Λ_1=12.005, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.05
+3358.8s 364 epoch 195000: ε_fro=35.0mHa, λ_eff=60.28Ha, Λ=448.15Ha (Λ_1=12.129, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.346Ha, gap: 4.0723Ha, ms/it: 11.08
+3369.9s 365 B@epoch 196000: ε_fro=35.1mHa, λ_eff=59.18Ha, Λ=448.02Ha (Λ_1=12.009, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 11.09
+3381.0s 366 B@epoch 197000: ε_fro=35.1mHa, λ_eff=59.11Ha, Λ=448.01Ha (Λ_1=11.998, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+3392.1s 367 epoch 198000: ε_fro=35.1mHa, λ_eff=59.19Ha, Λ=448.01Ha (Λ_1=12.008, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 11.10
+3403.2s 368 B@epoch 199000: ε_fro=35.1mHa, λ_eff=59.10Ha, Λ=448.00Ha (Λ_1=11.998, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 11.11
+3414.1s 369 epoch 199990: ε_fro=35.1mHa, λ_eff=59.21Ha, Λ=448.00Ha (Λ_1=12.010, Λ_2=436.0), cost = 29.0mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 10.94
+3414.1s 370 Saved optimized solution to /kaggle/working/runs/S8.npz
+3418.7s 371 built /kaggle/working/builds/S8_b10/dfthcsos: R,B,C=8,143,44 brot=10 J=10  e1=13.00 e2=59.72 mHa lam_eff=61.0114
+3423.3s 372 built /kaggle/working/builds/S8_b11/dfthcsos: R,B,C=8,143,44 brot=11 J=9  e1=5.71 e2=43.15 mHa lam_eff=59.3763
+3428.0s 373 built /kaggle/working/builds/S8_b12/dfthcsos: R,B,C=8,143,44 brot=12 J=8  e1=2.99 e2=37.23 mHa lam_eff=59.2115
+3432.6s 374 built /kaggle/working/builds/S8_b13/dfthcsos: R,B,C=8,143,44 brot=13 J=8  e1=1.57 e2=35.65 mHa lam_eff=59.1168
+3432.6s 375 {
+3432.6s 376 "name": "S8",
+3432.6s 377 "rank": 8,
+3432.6s 378 "bases": 143,
+3432.6s 379 "copies": 44,
+3432.6s 380 "epochs": 200000,
+3432.6s 381 "lr": 0.0001,
+3432.6s 382 "rho": 0.0001,
+3432.6s 383 "epsilon_dfthc": 0.012,
+3432.6s 384 "train_seconds": 2238,
+3432.6s 385 "b10_local": {
+3432.6s 386 "error_1": 0.013000817845341985,
+3432.6s 387 "error_2": 0.05972186422148123,
+3432.6s 388 "Lambda": 448.2674857638725,
+3432.6s 389 "E_gap": 4.171383466527914,
+3432.6s 390 "lambda_eff": 61.011398257785295
+3432.6s 391 },
+3432.6s 392 "b11_local": {
+3432.6s 393 "error_1": 0.0057103610459006094,
+3432.6s 394 "error_2": 0.0431478381153523,
+3432.6s 395 "Lambda": 448.04272081235763,
+3432.6s 396 "E_gap": 3.951818936926429,
+3432.6s 397 "lambda_eff": 59.3763466744661
+3432.6s 398 },
+3432.6s 399 "b12_local": {
+3432.6s 400 "error_1": 0.0029861149325696263,
+3432.6s 401 "error_2": 0.03722518125220666,
+3432.6s 402 "Lambda": 448.0171594174574,
+3432.6s 403 "E_gap": 3.9300360216002446,
+3432.6s 404 "lambda_eff": 59.21150197791117
+3432.6s 405 },
+3432.6s 406 "b13_local": {
+3432.6s 407 "error_1": 0.001572040755027279,
+3432.6s 408 "error_2": 0.035648243915291034,
+3432.6s 409 "Lambda": 447.99704750762737,
+3432.6s 410 "E_gap": 3.917590983422997,
+3432.6s 411 "lambda_eff": 59.116756243205806
+3432.6s 412 },
+3432.6s 413 "status": "NO_PRECISION_PASSES"
+3432.6s 414 }
+3432.6s 415 S8_stage1      status=NO_PRECISION_PASSES  brot=None improvement=nan
+3432.6s 416 S8             status=NO_PRECISION_PASSES  brot=None improvement=nan
+3432.6s 417 No verified result yet: submission.zip not written.
+3454.4s 418 Training U/V (8, 143, 76) and W (8, 143, 44) with generators None for 20000 epochs with DF-THC-SOS.
+3458.2s 419 B@epoch 0: ε_fro=37.3mHa, λ_eff=59.92Ha, Λ=448.05Ha (Λ_1=12.056, Λ_2=436.0), cost = 28.2mHa, E_SOS: -22144.299Ha, gap: 4.0254Ha, ms/it: 3.79
+3468.3s 420 B@epoch 1000: ε_fro=36.8mHa, λ_eff=59.19Ha, Λ=448.00Ha (Λ_1=12.009, Λ_2=436.0), cost = 27.7mHa, E_SOS: -22144.201Ha, gap: 3.9277Ha, ms/it: 10.07
+3478.5s 421 B@epoch 2000: ε_fro=36.7mHa, λ_eff=59.13Ha, Λ=447.98Ha (Λ_1=12.006, Λ_2=436.0), cost = 27.6mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.20
+3489.0s 422 B@epoch 3000: ε_fro=36.6mHa, λ_eff=59.12Ha, Λ=447.97Ha (Λ_1=12.007, Λ_2=436.0), cost = 27.5mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.52
+3499.2s 423 B@epoch 4000: ε_fro=36.6mHa, λ_eff=59.10Ha, Λ=447.95Ha (Λ_1=12.007, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.19
+3509.3s 424 B@epoch 5000: ε_fro=36.6mHa, λ_eff=59.38Ha, Λ=447.97Ha (Λ_1=12.037, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 10.12
+3519.2s 425 B@epoch 6000: ε_fro=36.6mHa, λ_eff=59.17Ha, Λ=447.95Ha (Λ_1=12.016, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.199Ha, gap: 3.9258Ha, ms/it: 9.86
+3529.0s 426 B@epoch 7000: ε_fro=36.6mHa, λ_eff=59.13Ha, Λ=447.94Ha (Λ_1=12.011, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 9.88
+3539.1s 427 B@epoch 8000: ε_fro=36.6mHa, λ_eff=59.10Ha, Λ=447.93Ha (Λ_1=12.009, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 9.99
+3549.1s 428 B@epoch 9000: ε_fro=36.5mHa, λ_eff=59.10Ha, Λ=447.92Ha (Λ_1=12.008, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.09
+3559.3s 429 B@epoch 10000: ε_fro=36.5mHa, λ_eff=59.32Ha, Λ=447.94Ha (Λ_1=12.029, Λ_2=435.9), cost = 27.5mHa, E_SOS: -22144.219Ha, gap: 3.9453Ha, ms/it: 10.13
+3569.4s 430 B@epoch 11000: ε_fro=36.5mHa, λ_eff=59.16Ha, Λ=447.92Ha (Λ_1=12.015, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.197Ha, gap: 3.9238Ha, ms/it: 10.14
+3579.5s 431 B@epoch 12000: ε_fro=36.5mHa, λ_eff=59.13Ha, Λ=447.92Ha (Λ_1=12.011, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.13
+3589.7s 432 B@epoch 13000: ε_fro=36.5mHa, λ_eff=59.11Ha, Λ=447.91Ha (Λ_1=12.008, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.12
+3599.8s 433 B@epoch 14000: ε_fro=36.5mHa, λ_eff=59.10Ha, Λ=447.90Ha (Λ_1=12.007, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.10
+3609.8s 434 B@epoch 15000: ε_fro=36.5mHa, λ_eff=59.10Ha, Λ=447.90Ha (Λ_1=12.006, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.08
+3619.9s 435 B@epoch 16000: ε_fro=36.5mHa, λ_eff=59.32Ha, Λ=447.92Ha (Λ_1=12.027, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.219Ha, gap: 3.9453Ha, ms/it: 10.07
+3630.0s 436 B@epoch 17000: ε_fro=36.5mHa, λ_eff=59.20Ha, Λ=447.90Ha (Λ_1=12.017, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.203Ha, gap: 3.9297Ha, ms/it: 10.09
+3640.1s 437 B@epoch 18000: ε_fro=36.5mHa, λ_eff=59.13Ha, Λ=447.90Ha (Λ_1=12.011, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.10
+3650.2s 438 B@epoch 19000: ε_fro=36.5mHa, λ_eff=59.11Ha, Λ=447.89Ha (Λ_1=12.008, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.12
+3660.3s 439 B@epoch 19990: ε_fro=36.5mHa, λ_eff=59.10Ha, Λ=447.89Ha (Λ_1=12.006, Λ_2=435.9), cost = 27.4mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.03
+3664.6s 440 built /kaggle/working/builds/S8_q12_b12/dfthcsos: R,B,C=8,143,44 brot=12 J=8  e1=2.91 e2=36.51 mHa lam_eff=59.0840
+3664.6s 441 {
+3664.6s 442 "name": "S8_q12",
+3664.6s 443 "source": "/kaggle/working/runs/S8.npz",
+3664.6s 444 "qat_epochs": 20000,
+3664.6s 445 "lr": 1e-06,
+3664.6s 446 "lr_final": 1e-07,
+3664.6s 447 "b12_local": {
+3664.6s 448 "error_1": 0.0029148692999910924,
+3664.6s 449 "error_2": 0.036511535237439496,
+3664.6s 450 "Lambda": 447.8877648652891,
+3664.6s 451 "E_gap": 3.914191878600832,
+3664.6s 452 "lambda_eff": 59.08397756971244
+3664.6s 453 },
+3664.6s 454 "status": "NO_PRECISION_PASSES"
+3664.6s 455 }
+3664.6s 456 S8_stage1      status=NO_PRECISION_PASSES  brot=None improvement=nan
+3664.6s 457 S8             status=NO_PRECISION_PASSES  brot=None improvement=nan
+3664.6s 458 S8_q12         status=NO_PRECISION_PASSES  brot=None improvement=nan
+3664.6s 459 No verified result yet: submission.zip not written.
+3685.9s 460 Training U/V (8, 143, 76) and W (8, 143, 44) with generators None for 20000 epochs with DF-THC-SOS.
+3689.4s 461 B@epoch 0: ε_fro=43.5mHa, λ_eff=59.09Ha, Λ=448.01Ha (Λ_1=12.012, Λ_2=436.0), cost = 35.3mHa, E_SOS: -22144.188Ha, gap: 3.9141Ha, ms/it: 3.51
+3699.4s 462 B@epoch 1000: ε_fro=41.6mHa, λ_eff=59.11Ha, Λ=448.03Ha (Λ_1=12.009, Λ_2=436.0), cost = 32.6mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 9.96
+3709.5s 463 B@epoch 2000: ε_fro=41.3mHa, λ_eff=59.36Ha, Λ=448.05Ha (Λ_1=12.033, Λ_2=436.0), cost = 32.2mHa, E_SOS: -22144.223Ha, gap: 3.9492Ha, ms/it: 10.14
+3720.0s 464 B@epoch 3000: ε_fro=41.2mHa, λ_eff=59.11Ha, Λ=448.03Ha (Λ_1=12.008, Λ_2=436.0), cost = 32.1mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.48
+3730.2s 465 B@epoch 4000: ε_fro=41.0mHa, λ_eff=59.24Ha, Λ=448.04Ha (Λ_1=12.022, Λ_2=436.0), cost = 31.9mHa, E_SOS: -22144.207Ha, gap: 3.9336Ha, ms/it: 10.21
+3740.3s 466 B@epoch 5000: ε_fro=41.0mHa, λ_eff=59.11Ha, Λ=448.03Ha (Λ_1=12.008, Λ_2=436.0), cost = 31.9mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.06
+3750.2s 467 B@epoch 6000: ε_fro=40.9mHa, λ_eff=59.25Ha, Λ=448.04Ha (Λ_1=12.022, Λ_2=436.0), cost = 31.8mHa, E_SOS: -22144.209Ha, gap: 3.9355Ha, ms/it: 9.94
+3760.1s 468 B@epoch 7000: ε_fro=40.9mHa, λ_eff=59.11Ha, Λ=448.03Ha (Λ_1=12.007, Λ_2=436.0), cost = 31.8mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 9.85
+3770.0s 469 B@epoch 8000: ε_fro=40.8mHa, λ_eff=59.46Ha, Λ=448.06Ha (Λ_1=12.040, Λ_2=436.0), cost = 31.7mHa, E_SOS: -22144.236Ha, gap: 3.9629Ha, ms/it: 9.89
+3780.0s 470 B@epoch 9000: ε_fro=40.8mHa, λ_eff=59.14Ha, Λ=448.03Ha (Λ_1=12.011, Λ_2=436.0), cost = 31.7mHa, E_SOS: -22144.193Ha, gap: 3.9199Ha, ms/it: 10.02
+3790.1s 471 B@epoch 10000: ε_fro=40.8mHa, λ_eff=59.11Ha, Λ=448.02Ha (Λ_1=12.007, Λ_2=436.0), cost = 31.7mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.13
+3800.3s 472 B@epoch 11000: ε_fro=40.7mHa, λ_eff=59.27Ha, Λ=448.04Ha (Λ_1=12.023, Λ_2=436.0), cost = 31.7mHa, E_SOS: -22144.211Ha, gap: 3.9375Ha, ms/it: 10.14
+3810.4s 473 B@epoch 12000: ε_fro=40.7mHa, λ_eff=59.11Ha, Λ=448.02Ha (Λ_1=12.008, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.13
+3820.5s 474 B@epoch 13000: ε_fro=40.7mHa, λ_eff=59.11Ha, Λ=448.02Ha (Λ_1=12.007, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.10
+3830.6s 475 B@epoch 14000: ε_fro=40.7mHa, λ_eff=59.28Ha, Λ=448.03Ha (Λ_1=12.024, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.213Ha, gap: 3.9395Ha, ms/it: 10.09
+3840.6s 476 B@epoch 15000: ε_fro=40.7mHa, λ_eff=59.12Ha, Λ=448.01Ha (Λ_1=12.010, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.191Ha, gap: 3.9180Ha, ms/it: 10.03
+3850.7s 477 B@epoch 16000: ε_fro=40.7mHa, λ_eff=59.11Ha, Λ=448.01Ha (Λ_1=12.008, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.08
+3860.8s 478 B@epoch 17000: ε_fro=40.7mHa, λ_eff=59.39Ha, Λ=448.03Ha (Λ_1=12.032, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.227Ha, gap: 3.9531Ha, ms/it: 10.11
+3870.9s 479 B@epoch 18000: ε_fro=40.7mHa, λ_eff=59.16Ha, Λ=448.01Ha (Λ_1=12.015, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.197Ha, gap: 3.9238Ha, ms/it: 10.10
+3881.0s 480 B@epoch 19000: ε_fro=40.7mHa, λ_eff=59.11Ha, Λ=448.00Ha (Λ_1=12.008, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.189Ha, gap: 3.9160Ha, ms/it: 10.10
+3891.0s 481 epoch 19990: ε_fro=40.6mHa, λ_eff=59.65Ha, Λ=448.04Ha (Λ_1=12.051, Λ_2=436.0), cost = 31.6mHa, E_SOS: -22144.262Ha, gap: 3.9883Ha, ms/it: 9.98
+3895.1s 482 built /kaggle/working/builds/S8_q11_b11/dfthcsos: R,B,C=8,143,44 brot=11 J=9  e1=5.95 e2=40.67 mHa lam_eff=59.0860
+3895.1s 483 {
+3895.1s 484 "name": "S8_q11",
+3895.1s 485 "source": "/kaggle/working/runs/S8.npz",
+3895.1s 486 "qat_epochs": 20000,
+3895.1s 487 "lr": 1e-06,
+3895.1s 488 "lr_final": 1e-07,
+3895.1s 489 "b11_local": {
+3895.1s 490 "error_1": 0.005948565954008013,
+3895.1s 491 "error_2": 0.04067349753169738,
+3895.1s 492 "Lambda": 448.00256794719064,
+3895.1s 493 "E_gap": 3.9134546115274134,
+3895.1s 494 "lambda_eff": 59.0860415328496
+3895.1s 495 },
+3895.1s 496 "status": "NO_PRECISION_PASSES"
+3895.1s 497 }
+3895.1s 498 S8_stage1      status=NO_PRECISION_PASSES  brot=None improvement=nan
+3895.1s 499 S8             status=NO_PRECISION_PASSES  brot=None improvement=nan
+3895.1s 500 S8_q12         status=NO_PRECISION_PASSES  brot=None improvement=nan
+3895.1s 501 S8_q11         status=NO_PRECISION_PASSES  brot=None improvement=nan
+3895.1s 502 No verified result yet: submission.zip not written.
+3895.1s 503 ['__notebook__.ipynb', 'builds', 'results.jsonl', 'runs']
+3901.2s 504 /usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+3901.2s 505 cells[i][c] = re.sub('\\\\\|', '|', cell)
+3901.3s 506 /usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+3901.3s 507 text = re.sub(r'_', '\_', text) # Escape underscores in display text
+3902.1s 508 [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+3902.2s 509 [NbConvertApp] Writing 81262 bytes to __notebook__.ipynb
+3904.7s 510 [NbConvertApp] Converting notebook __notebook__.ipynb to html
+3905.3s 511 [NbConvertApp] Writing 378652 bytes to __results__.html

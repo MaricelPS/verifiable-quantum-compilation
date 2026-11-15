@@ -1,0 +1,21 @@
+decoder,stage,toffolis,qubits
+reference,total,5725461,1893
+reference,EEA multiply sweep and quotients,3226444,
+reference,Chien search and Forney,1444737,
+reference,EEA shift of B,474752,
+reference,EEA swap A <-> B,396492,
+reference,EEA flag update,65712,
+reference,initial shift,61824,
+reference,EEA degree bookkeeping,24864,
+reference,EEA halting counter,21312,
+reference,other,9324,
+tower,total,4146744,1867
+tower,EEA multiply sweep and quotients,2708332,
+tower,Chien search and Forney,384132,
+tower,EEA shift of B,474752,
+tower,EEA swap A <-> B,396492,
+tower,EEA flag update,65712,
+tower,initial shift,61824,
+tower,EEA degree bookkeeping,24864,
+tower,EEA halting counter,21312,
+tower,other,9324,
