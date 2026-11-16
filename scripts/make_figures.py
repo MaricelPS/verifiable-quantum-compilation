@@ -31,45 +31,54 @@ def save(fig, name):
 
 def leaderboard():
     d = pd.read_csv(ROOT / 'results' / 'leaderboard.csv')
-    fig, ax = plt.subplots(figsize=(8, 4.4))
+    fig, ax = plt.subplots(figsize=(9, 4.6))
     ax.grid(axis='x', visible=False)
     bars = ax.bar(range(len(d)), d.public_score, width=0.6, color=S1, edgecolor=BG, linewidth=2)
     for rect, v in zip(bars, d.public_score):
         ax.annotate(f'{v:.3f}', (rect.get_x() + rect.get_width() / 2, v), xytext=(0, 4),
                     textcoords='offset points', ha='center', color=INK2, fontsize=9)
     ax.set_xticks(range(len(d)))
-    ax.set_xticklabels([s.replace(' + ', '\n+ ').replace('chemistry ', 'chem ') for s in d.submission],
-                       fontsize=8.5)
+    ax.set_xticklabels([s.replace('|', '\n') for s in d.label], fontsize=8.5)
     ax.set_ylabel('public score (geometric mean of\nimprovements over the 3 tasks)')
-    ax.set_ylim(0, 2.6)
+    ax.set_ylim(0, 3.8)
     ax.set_title('Public leaderboard score, submission by submission')
     save(fig, 'leaderboard.png')
 
 
 def dqi_breakdown():
     d = pd.read_csv(ROOT / 'dqi' / 'results' / 'stage_profile.csv')
-    d = d[~d.stage.isin(['total'])]
-    piv = d.pivot(index='stage', columns='decoder', values='toffolis')
-    piv = piv.sort_values('reference')
-    fig, ax = plt.subplots(figsize=(8, 4.6))
+    d = d[d.stage != 'total']
+
+    def group(stage):
+        if stage.startswith('EEA') or stage.startswith('key equation'):
+            return 'key-equation solver'
+        if stage.startswith('Chien'):
+            return 'Chien search and Forney'
+        return 'other'
+
+    d = d.assign(group=d.stage.map(group))
+    piv = d.pivot_table(index='decoder', columns='group', values='toffolis', aggfunc='sum').fillna(0) / 1e6
+    order = ['two-phase', 'tower', 'reference']
+    labels = {'reference': 'reference decoder\n(synchronized EEA)', 'tower': 'tower-field arithmetic\n(same EEA)',
+              'two-phase': 'two-phase solver\n+ tower field'}
+    groups = [('key-equation solver', S1), ('Chien search and Forney', S2), ('other', '#b4b2a9')]
+    fig, ax = plt.subplots(figsize=(8, 3.6))
     ax.grid(axis='y', visible=False)
-    y = range(len(piv))
-    h = 0.38
-    ax.barh([i + h / 2 for i in y], piv.reference / 1e6, height=h, color=S1, edgecolor=BG, linewidth=1.5,
-            label='reference decoder')
-    ax.barh([i - h / 2 for i in y], piv.tower / 1e6, height=h, color=S2, edgecolor=BG, linewidth=1.5,
-            label='tower-field decoder (this work)')
-    for i, (r, t) in enumerate(zip(piv.reference, piv.tower)):
-        if r > 2e5:
-            ax.annotate(f'{r / 1e6:.2f} M → {t / 1e6:.2f} M' if r != t else f'{r / 1e6:.2f} M (unchanged)',
-                        (max(r, t) / 1e6, i), xytext=(6, 0), textcoords='offset points', va='center',
-                        color=INK2, fontsize=9)
-    ax.set_yticks(list(y))
-    ax.set_yticklabels(piv.index, fontsize=9.5)
+    left = [0.0] * len(order)
+    for name, color in groups:
+        vals = [piv.loc[o, name] for o in order]
+        ax.barh(range(len(order)), vals, left=left, height=0.55, color=color, edgecolor=BG, linewidth=2,
+                label=name)
+        left = [a + b for a, b in zip(left, vals)]
+    for i, total in enumerate(left):
+        ax.annotate(f'{total:.2f} M', (total, i), xytext=(6, 0), textcoords='offset points', va='center',
+                    color=INK2, fontsize=9.5)
+    ax.set_yticks(range(len(order)))
+    ax.set_yticklabels([labels[o] for o in order], fontsize=9.5)
     ax.set_xlabel('Toffoli gates (millions)')
-    ax.set_xlim(0, 4.3)
-    ax.set_title('dqi: where the Toffolis go (5.73 M → 4.15 M)')
-    ax.legend(loc='lower right')
+    ax.set_xlim(0, 6.6)
+    ax.set_title('dqi: Toffolis by decoder stage')
+    ax.legend(loc='lower right', fontsize=9)
     save(fig, 'dqi_toffoli_breakdown.png')
 
 

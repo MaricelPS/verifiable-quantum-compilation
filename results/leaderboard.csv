@@ -1,7 +1,8 @@
-submission,chemistry,invsqrt,dqi,public_score
-sample (organizers),1.000,1.000,1.000,1.00000
-chemistry x1.630,1.630,1.000,1.000,1.17674
-chemistry x1.699,1.699,1.000,1.000,1.19320
-+ own invsqrt x4.67,1.699,4.67,1.000,1.99401
-chemistry x1.719 + invsqrt x4.81,1.719,4.81,1.000,2.02261
-+ own dqi x1.419,1.719,4.81,1.419,2.27307
+submission,label,chemistry,invsqrt,dqi,public_score
+sample circuits (organizers),sample,1.000,1.000,1.000,1.00000
+chemistry x1.630,chem ×1.630,1.630,1.000,1.000,1.17674
+chemistry x1.699,chem ×1.699,1.699,1.000,1.000,1.19320
++ own invsqrt x4.67,+ invsqrt|×4.67,1.699,4.67,1.000,1.99401
+chemistry x1.719 + invsqrt x4.81,chem ×1.719|invsqrt ×4.81,1.719,4.81,1.000,2.02261
++ own dqi x1.419 (tower field),+ dqi ×1.419|(tower field),1.719,4.81,1.419,2.27307
++ own dqi x4.52 (two-phase solver),+ dqi ×4.52|(two-phase),1.719,4.81,4.52,3.34030

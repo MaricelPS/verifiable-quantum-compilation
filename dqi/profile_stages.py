@@ -1,5 +1,7 @@
 """Toffolis per decoder stage, by ablation: rebuild with one stage replaced by a no-op and subtract.
 
+Covers the reference decoder, the tower-field EEA decoder and the two-phase decoder.
+
     COMP_DIR=... python dqi/profile_stages.py results/stage_profile.csv
 """
 import csv
@@ -9,7 +11,7 @@ import _paths  # noqa: F401
 import kickmix as km
 from dqi import dqi_reference_circuit as ref
 
-import decoder
+import decoder_tower_eea as decoder
 
 M, N, DEG = 4095, 70, 12
 STAGES = {
@@ -48,5 +50,37 @@ def main(out):
         w.writerows(rows)
 
 
+
+
+def profile_two_phase(out):
+    """Ablation for the two-phase decoder: drop Forney, then phase 2 as well."""
+    import decoder as two_phase
+
+    def total(skip=()):
+        cls = type('Ablated', (two_phase.TwoPhaseDecoder,), {name: (lambda self, *a, **k: None) for name in skip})
+        b = km.CircuitBuilder()
+        syn = [b.create_quantum_register(DEG, name=f'S{i}') for i in range(N)]
+        err = [b.create_classical_register(DEG, name=f'E{j}') for j in range(M)]
+        cls(b, syn, err).build()
+        c = b.finish_circuit()
+        return c.operation_statistics().num_toffoli_like, c.num_qubits
+
+    full, qubits = total()
+    no_forney, _ = total(['_forney'])
+    no_p2, _ = total(['_forney', '_p2', '_p2_rev'])
+    rows = [
+        dict(decoder='two-phase', stage='total', toffolis=full, qubits=qubits),
+        dict(decoder='two-phase', stage='Chien search and Forney', toffolis=full - no_forney, qubits=''),
+        dict(decoder='two-phase', stage='key equation, phase 2 (replay)', toffolis=no_forney - no_p2, qubits=''),
+        dict(decoder='two-phase', stage='key equation, phase 1 (divsteps)', toffolis=no_p2, qubits=''),
+    ]
+    with open(out, 'a', newline='') as f:
+        csv.DictWriter(f, fieldnames=['decoder', 'stage', 'toffolis', 'qubits']).writerows(rows)
+    for r in rows:
+        print(r)
+
+
 if __name__ == '__main__':
-    main(sys.argv[1] if len(sys.argv) > 1 else 'results/stage_profile.csv')
+    path = sys.argv[1] if len(sys.argv) > 1 else 'results/stage_profile.csv'
+    main(path)
+    profile_two_phase(path)

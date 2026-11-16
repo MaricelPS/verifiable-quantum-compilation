@@ -10,9 +10,9 @@ the submitted data exactly.
 |---|---|---|---|---|
 | [**Chemistry**](chemistry/) (`dfthcsos`) | Block-encodes the FeMoCo Hamiltonian (nitrogenase active site) for phase estimation | λ_eff · T · Q | 3.356 × 10⁹ → 1.952 × 10⁹ | **×1.719** |
 | [**invsqrt**](invsqrt/) | Applies the phase e^{2πi/√x} to an integer register | Q · C | 2,076,774 → 431,442 | **×4.81** |
-| [**dqi**](dqi/) | Decodes a Reed–Solomon code inside Decoded Quantum Interferometry | R · Q² · T | 2.444 × 10¹³ → 1.722 × 10¹³ | **×1.419** |
+| [**dqi**](dqi/) | Decodes a Reed–Solomon code inside Decoded Quantum Interferometry | R · Q² · T | 2.444 × 10¹³ → 5.407 × 10¹² | **×4.52** |
 
-The competition score is the geometric mean of the three improvements: **2.273** on the public leaderboard.
+The competition score is the geometric mean of the three improvements: **3.340** on the public leaderboard.
 
 ![Leaderboard history](figures/leaderboard.png)
 
@@ -24,8 +24,9 @@ The competition score is the geometric mean of the three improvements: **2.273**
 - **Measure first, then attack the biggest cost.** Each benchmark starts with a cost breakdown: a closed-form cost
   model for chemistry, per-stage Toffoli counts for invsqrt and dqi. The improvements went where the cost was.
 - **Exact models before circuits.** The invsqrt design has an exact integer model of the circuit, so its worst error
-  over all 3.1 million inputs is known before anything is built. The dqi field arithmetic is tested exhaustively in
-  simulation.
+  over all 3.1 million inputs is known before anything is built. The new dqi algorithm ran on a classical model
+  over 118,000 simulated shots, which also sized its registers, before it became a circuit; its field arithmetic is
+  tested exhaustively in simulation.
 - **Own work only.** Public notebooks were read to understand the state of the art in chemistry
   ([gap analysis](chemistry/README.md#gap-analysis)) but no public circuit or factorization was reused.
 
@@ -41,10 +42,15 @@ Toffoli count by 59%, and spending the remaining error margin on the normalizati
 by bit, reads a 256-entry table of piecewise-quadratic coefficients, and evaluates the polynomial with truncated
 Horner steps tuned by greedy search: 40% fewer qubits and 67% fewer Toffolis.
 
-**[dqi](dqi/README.md).** The Reed–Solomon decoder spends most of its gates on GF(2¹²) arithmetic. Rewriting the
-field as a tower GF(((2³)²)²) turns every multiplication and inversion into a network of AND gates that can be
-uncomputed by measurement: inversion drops from 315 Toffolis to 78, multiplication from 63 to 54. That cut T by
-28% without touching the decoding algorithm.
+**[dqi](dqi/README.md).** Two steps.
+- **Field arithmetic.** Rewriting GF(2¹²) as a tower GF(((2³)²)²) turns every multiplication and inversion into a
+  network of AND gates that is uncomputed by measurement: inversion drops from 315 Toffolis to 78, multiplication
+  from 63 to 54 (×1.42).
+- **The decoding algorithm.** The reference's reversible Euclidean algorithm pays for all of its data-dependent
+  sub-steps in every one of 222 iterations. I replaced it with a key-equation solver of my own design with a fixed
+  schedule of 2 × 70 steps: Bernstein–Yang divsteps whose quotients are stashed, for free, in the registers that
+  the division by x releases, then a replay of the transition matrices that rebuilds σ and ω and pops the stash.
+  The algorithm was checked on a classical model first. Toffolis dropped from 4.15 M to 1.08 M (×4.52 overall).
 
 ![dqi Toffoli breakdown](figures/dqi_toffoli_breakdown.png)
 
@@ -53,7 +59,7 @@ uncomputed by measurement: inversion drops from 315 Toffolis to 78, multiplicati
 ```
 chemistry/   training, quantization and submission code; Kaggle notebooks; logs and experiment table
 invsqrt/     polynomial design, exact error model, optimizer, full verification
-dqi/         tower-field arithmetic, decoder, tests, profiling and schedule analysis
+dqi/         two-phase decoder, its classical model, tower-field arithmetic, tests, profiling
 figures/     overview figures (scripts/make_figures.py)
 results/     leaderboard history
 ```
@@ -66,9 +72,9 @@ is not redistributed. Download it from the competition page and point `COMP_DIR`
 
 ```bash
 export COMP_DIR=/path/to/competition-data
-python -m pytest dqi/tests -q          # tower-field circuits and a small decoder, a few seconds
+python -m pytest dqi/tests -q          # tower field, classical model, full decoder (~1 min)
 python invsqrt/build.py invsqrt.kmb    # the submitted invsqrt circuit
-python dqi/decoder.py dqi.kmb          # the submitted dqi circuit (~1 min, 773 MB)
+python dqi/decoder.py dqi.kmb          # the submitted dqi circuit (~30 s, 488 MB)
 python scripts/make_figures.py         # overview figures
 ```
 
@@ -79,8 +85,9 @@ was run with Python 3.13, the version of the Kaggle images the competition's `ki
 ## Credits
 
 - Google Quantum AI: problems, verifiers, the `kickmix` simulator, the reference circuits and the chemistry starter
-  kit (DF-THC-SOS trainer). The dqi decoder subclasses the organizers' reference implementation of the
-  Proos–Zalka synchronized extended Euclidean algorithm.
+  kit (DF-THC-SOS trainer). The first dqi decoder subclasses the organizers' reference implementation of the
+  Proos–Zalka synchronized extended Euclidean algorithm. The second one adapts the divstep of D. J. Bernstein and
+  B.-Y. Yang, "Fast constant-time gcd computation and modular inversion" (2019), to reversible circuits.
 - Public competition notebooks by ozertuu and mrmeows, read for the chemistry gap analysis only.
 - Developed with an AI assistant (Claude) as a pair programmer. Design decisions, runs and analysis are documented
   in each folder.

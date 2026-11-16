@@ -1,45 +1,58 @@
-"""Benchmark II (DQI): Reed-Solomon MBUC decoder with tower-field GF(2^12) arithmetic.
+"""Benchmark II (DQI): constant-schedule reversible key-equation solver + tower-field Forney.
 
-Built on the organizers' reference circuit (`dqi/dqi_reference_circuit.py`, synchronized extended
-Euclidean algorithm after Proos and Zalka), which it subclasses.
+Replaces the reference's synchronized extended Euclidean algorithm (222 iterations, each paying
+for every sub-step under quantum control) with two phases of exactly n = 70 steps whose shape is
+known classically:
 
-Changes against the reference circuit:
-  * Forney/Chien: the per-position inverse sigma'^{-1} (315 Toffolis) becomes a
-    tower-field inverse (78 Toffolis) gated by the sigma==0 flag (3 Toffolis), which
-    also replaces the 12-Toffoli `located = is_zero AND omega` product. The zero test
-    is an AND tree uncomputed by measurement (11 Toffolis instead of 2 x 12).
-  * EEA quotient: b/a via gated tower inverse + 54-Toffoli tower multiply
-    (about 135 Toffolis instead of 402).
-  * EEA sweep: the controlled multiply (75 Toffolis) becomes a gated copy of q
-    (12 Toffolis, measurement-uncomputed) and a 54-Toffoli tower multiply.
+Phase 1 (Bernstein-Yang style divsteps on the reversed remainders f, g):
+    swap_t = (delta > 0) and g(0) != 0;  if swap_t: (f, g) <- (g, f), delta <- -delta
+    c_t = g(0) / f(0);  g <- (g + c_t f) / x;  delta <- delta + 1
+  The division by x is a relabeling of g's registers, and the register freed by it stores c_t
+  (the stash), so each step is reversible with zero bookkeeping cost.
+
+Phase 2 (replay of the transition matrices from the right, popping the stash):
+    v <- v T_t P_t   with T_t = [[x, 0], [c_t, 1]] and P_t the swap, starting from v = (0, 1).
+  The new constant coefficient of v_f equals c_t v_g(0), so c_t is uncomputed from it.
+  At the end v = (omega_rev, sigma_rev).
+
+Forney: sigma_rev(X) = 0 marks an error at X = alpha^j, with value X^-70 omega_rev(X) / (X sigma_rev'(X)).
+
+Register sizes per step come from classical simulation of the algorithm (bounds_k20.json):
+shots with error weight below 20 (probability ~1e-5) may fail.
 """
 from __future__ import annotations
 
 import argparse
+import json
+from pathlib import Path
 
 import _paths  # noqa: F401  (competition kickmix + verifiers)
 import kickmix as km
-from dqi import dqi_reference_circuit as ref  # noqa: E402
 
-import tower  # noqa: E402
+import tower
+
+N_SYN = 70
+DEG = 12
+DELTA_BITS = 7
+BOUNDS = json.loads((Path(__file__).with_name('bounds_k20.json')).read_text())
 
 T_MAT, TINV_MAT = tower.basis_matrices()
 TO_TOWER = tower._cnot_program(TINV_MAT)
 FROM_TOWER = tower._invert_program(TO_TOWER)
-MUL_TT_K = tower.precompose(tower.terms_mul4096(), outmap=T_MAT)  # tower x tower -> kickmix
-MUL_KT_K = tower.precompose(tower.terms_mul4096(), xmap=TINV_MAT, outmap=T_MAT)
+MUL_TK_K = tower.precompose(tower.terms_mul4096(), ymap=TINV_MAT, outmap=T_MAT)  # tower x kickmix
+MUL_KT_K = tower.precompose(tower.terms_mul4096(), xmap=TINV_MAT, outmap=T_MAT)  # kickmix x tower
 
 
-def _to_tower(builder, reg):
-    tower._run_program(builder, reg, TO_TOWER)
+def _to_tower(b, reg):
+    tower._run_program(b, reg, TO_TOWER)
 
 
-def _from_tower(builder, reg):
-    tower._run_program(builder, reg, FROM_TOWER)
+def _from_tower(b, reg):
+    tower._run_program(b, reg, FROM_TOWER)
 
 
 class ZeroTest:
-    """flag = (reg == 0) through an AND tree; uncomputed by measurement (0 Toffolis)."""
+    """flag = (reg == 0) by an AND tree, uncomputed by measurement."""
 
     def __init__(self, builder, reg):
         self.b, self.reg = builder, reg
@@ -47,8 +60,7 @@ class ZeroTest:
     def compute(self):
         b = self.b
         b.x(self.reg)
-        layer = list(self.reg)
-        self.steps = []
+        layer, self.steps = list(self.reg), []
         while len(layer) > 1:
             nxt = []
             for i in range(0, len(layer) - 1, 2):
@@ -71,185 +83,262 @@ class ZeroTest:
         b.x(self.reg)
 
 
-class TowerDecoder(ref.ProosAndZalkaDecoder):
+class Pool:
+    """LIFO pool of zeroed 12-qubit registers; keeps register identities stable under reversal."""
 
-    # ------------------------------------------------------------------ EEA multiply step
-    def _multiply_and_add_or_sub(self, builder, reg_a, reg_b, n_A, n_a, n_q, ctrl, it, *,
-                                 is_adjoint):
-        c0_hc, _, _, c3_hc = ctrl
-        m = len(reg_b)
+    def __init__(self, builder):
+        self.b, self.free = builder, []
 
-        def accumulate_quotient(index, control):
-            with builder.mark('quotient_div'):
-                inv = tower.TowerInverse(builder, reg_a[index], gate=control,
-                                         out_basis='tower')
-                y = inv.compute()
-                scratch = builder.alloc_qubits(1)[0]
-                tower.emit_bilinear(builder, reg_b[index], y, q_i, MUL_KT_K, scratch)
-                builder.free(scratch)
-                inv.uncompute()
-                inv.release()
+    def acquire(self):
+        return self.free.pop() if self.free else self.b.alloc_qubits(DEG)
 
-        def gated_mul(i, control):
-            # reg_b[i] ^= (control * q_i) * reg_a[i]
-            qg = builder.alloc_qubits(self.field.degree)
-            builder.init_and(control, q_i, qg)
-            _to_tower(builder, qg)
-            _to_tower(builder, reg_a[i])
-            scratch = builder.alloc_qubits(1)[0]
-            tower.emit_bilinear(builder, qg, reg_a[i], reg_b[i], MUL_TT_K, scratch)
-            builder.free(scratch)
-            _from_tower(builder, reg_a[i])
-            _from_tower(builder, qg)
-            builder.del_and(control, q_i, qg)
-            builder.free(qg)
+    def release(self, reg):
+        self.free.append(reg)
 
-        def sweep_positions():
-            with builder.mark('sweep_positions'):
-                lim_q = min(m - 1, 1 + it)
-                lim_q1 = min(m, 1 + it)
-                lim_a = min(m - 2, it // 2 + 1)
-                lim_A = m - 2
-                order = range(m) if is_adjoint else range(m - 1, -1, -1)
-                _active, _xor_threshold = ref._active, ref._xor_threshold
+    def resize(self, lst, n):
+        while len(lst) < n:
+            lst.append(self.acquire())
+        while len(lst) > n:
+            self.release(lst.pop())
 
-                with (
-                    builder.unary_iteration(n_q, control=c0_hc) as eq_i,
-                    builder.unary_iteration(n_q, control=c3_hc) as eq_ip1,
-                    builder.unary_iteration(n_a, control=c3_hc) as cur_a,
-                    builder.unary_iteration(n_A, control=c0_hc) as cur_A,
-                ):
-                    mul = builder.alloc_qubits(1)[0]
 
-                    def endpoint(i):
-                        _xor_threshold(builder, cur_a, lim_a, mul, c3_hc, i + 1,
-                                       at_least=True, lowest=1)
-                        _xor_threshold(builder, cur_A, lim_A, mul, c0_hc, m - i,
-                                       at_least=True, lowest=1)
+class TwoPhaseDecoder:
 
-                    prev = None
-                    for i in order:
-                        if prev is None:
-                            endpoint(i)
-                        else:
-                            builder.cx(
-                                km.array([
-                                    _active(cur_a, min(prev, i) + 1, lim_a),
-                                    _active(cur_A, m - max(prev, i), lim_A),
-                                ]),
-                                mul,
-                            )
-                        prev = i
+    def __init__(self, builder, syndromes, error_mbuc):
+        self.b = builder
+        self.S = syndromes
+        self.E = error_mbuc
+        self.pool = Pool(builder)
+        self.scratch = None
 
-                        swaps = [a for a in (_active(eq_i, i, lim_q),
-                                             _active(eq_ip1, i + 1, lim_q1))
-                                 if a is not False]
-                        multiplies = i < lim_a or i >= 2
+    # ------------------------------------------------------------------ helpers
+    def _mul(self, x, y, out, terms):
+        tower.emit_bilinear(self.b, x, y, out, terms, self.scratch)
 
-                        if is_adjoint and multiplies:
-                            gated_mul(i, mul)
-                        if len(swaps) == 1:
-                            builder.cswap(swaps[0], q_i, reg_a[i])
-                        elif swaps:
-                            both = builder.alloc_qubits(1)[0]
-                            builder.cx(km.array(swaps), both)
-                            builder.cswap(both, q_i, reg_a[i])
-                            builder.cx(km.array(swaps), both)
-                            builder.free(both)
-                        if not is_adjoint and multiplies:
-                            gated_mul(i, mul)
+    def _swap_flags(self):
+        """Returns (pos, gz, cleanup) with pos = delta > 0 and gz = (g0 == 0)."""
+        b = self.b
+        ztd = ZeroTest(b, self.delta)
+        dz = ztd.compute()
+        ztg = ZeroTest(b, self.G[0])
+        gz = ztg.compute()
+        sign = self.delta[DELTA_BITS - 1]
+        pos = b.alloc_qubits(1)[0]
+        b.x(km.array([sign, dz]))
+        b.init_and(sign, dz, pos)
+        b.x(km.array([sign, dz]))
 
-                    endpoint(prev)
-                    builder.free(mul)
+        def cleanup():
+            b.x(km.array([sign, dz]))
+            b.del_and(sign, dz, pos)
+            b.x(km.array([sign, dz]))
+            b.free(pos)
+            ztg.uncompute()
+            ztd.uncompute()
+        return pos, gz, cleanup
 
-        with builder.mark('multiply_and_add_or_sub'):
-            q_i = builder.alloc_qubits(self.field.degree)
-            leading, trailing = (0, m - 1) if is_adjoint else (m - 1, 0)
-            accumulate_quotient(leading, c3_hc if is_adjoint else c0_hc)
-            builder.iadd(n_a, target=n_q)
-            sweep_positions()
-            builder.isub(n_a, target=n_q)
-            accumulate_quotient(trailing, c0_hc if is_adjoint else c3_hc)
-            builder.free(q_i)
+    # ------------------------------------------------------------------ phase 1
+    def _p1(self, t):
+        b, B = self.b, BOUNDS
+        self.p1_sizes.append((len(self.F), len(self.G)))
+        self.pool.resize(self.F, B['AF'][t])
+        self.pool.resize(self.G, B['AG'][t])
+        sb = b.alloc_qubits(1)[0]
+        pos, gz, cleanup = self._swap_flags()
+        b.x(gz)
+        b.init_and(pos, gz, sb)
+        b.x(gz)
+        cleanup()
+        for i in range(B['W'][t]):
+            b.cswap(sb, self.F[i], self.G[i])
+        b.cx(sb, self.delta)
+        b.iadd(1, target=self.delta)
+        b.iadd(1, target=self.delta, control=sb)
+        c = b.alloc_qubits(DEG)
+        inv = tower.TowerInverse(b, self.F[0], out_basis='tower')
+        y = inv.compute()
+        self._mul(self.G[0], y, c, MUL_KT_K)
+        inv.uncompute()
+        inv.release()
+        _to_tower(b, c)
+        for i in range(B['R'][t]):
+            self._mul(c, self.F[i], self.G[i], MUL_TK_K)
+        _from_tower(b, c)
+        slot = self.G.pop(0)
+        b.cx(c, slot)
+        b.cx(slot, c)
+        b.free(c)
+        self.stash[t] = slot
+        self.swapbits[t] = sb
 
-    # ------------------------------------------------------------------ Chien + Forney
-    def _chien_search_and_forney_mbuc(self, builder, reg_b, error_mbuc, n_b, n_B):
-        gf = self.field
-        degree = gf.degree
-        m = len(reg_b)
-        t = self.n_syndromes // 2
-        block_length = (1 << degree) - 1
-        primitive = gf.primitive_element
+    def _p1_rev(self, t):
+        b, B = self.b, BOUNDS
+        slot, sb = self.stash.pop(t), self.swapbits[t]
+        c = b.alloc_qubits(DEG)
+        b.cx(slot, c)
+        b.cx(c, slot)
+        self.G.insert(0, slot)
+        _to_tower(b, c)
+        for i in reversed(range(B['R'][t])):
+            self._mul(c, self.F[i], self.G[i], MUL_TK_K)
+        _from_tower(b, c)
+        inv = tower.TowerInverse(b, self.F[0], out_basis='tower')
+        y = inv.compute()
+        self._mul(self.G[0], y, c, MUL_KT_K)
+        inv.uncompute()
+        inv.release()
+        b.free(c)
+        b.isub(1, target=self.delta, control=sb)
+        b.isub(1, target=self.delta)
+        b.cx(sb, self.delta)
+        for i in reversed(range(B['W'][t])):
+            b.cswap(sb, self.F[i], self.G[i])
+        pos, gz, cleanup = self._swap_flags()
+        b.x(gz)
+        b.del_and(pos, gz, sb)
+        b.x(gz)
+        cleanup()
+        b.free(sb)
+        nf, ng = self.p1_sizes.pop()
+        self.pool.resize(self.G, ng)
+        self.pool.resize(self.F, nf)
 
-        with builder.mark('pre_align_reg_b'):
-            self._pre_align_reg_b(builder, reg_b, n_b, n_B, is_adjoint=False)
+    # ------------------------------------------------------------------ phase 2
+    def _p2(self, j):
+        b, B = self.b, BOUNDS
+        t = N_SYN - 1 - j
+        self.VF.insert(0, self.pool.acquire())
+        self.p2_sizes.append((len(self.VF), len(self.VG)))
+        self.pool.resize(self.VF, B['LVF'][j])
+        self.pool.resize(self.VG, B['LVG'][j])
+        c = self.stash.pop(t)
+        _to_tower(b, c)
+        for i in range(B['M2'][j]):
+            self._mul(c, self.VG[i], self.VF[i], MUL_TK_K)
+        _from_tower(b, c)
+        inv = tower.TowerInverse(b, self.VG[0], out_basis='tower')
+        y = inv.compute()
+        self._mul(self.VF[0], y, c, MUL_KT_K)
+        inv.uncompute()
+        inv.release()
+        self.pool.release(c)
+        for i in range(B['W2'][j]):
+            b.cswap(self.swapbits[t], self.VF[i], self.VG[i])
 
-        sigma = reg_b[0]
-        sigma_prime = reg_b[1]
-        omega = reg_b[m // 2 + t]
-        is_error = builder.alloc_bits(1)
+    def _p2_rev(self, j):
+        b, B = self.b, BOUNDS
+        t = N_SYN - 1 - j
+        for i in reversed(range(B['W2'][j])):
+            b.cswap(self.swapbits[t], self.VF[i], self.VG[i])
+        c = self.pool.acquire()
+        inv = tower.TowerInverse(b, self.VG[0], out_basis='tower')
+        y = inv.compute()
+        self._mul(self.VF[0], y, c, MUL_KT_K)
+        inv.uncompute()
+        inv.release()
+        _to_tower(b, c)
+        for i in reversed(range(B['M2'][j])):
+            self._mul(c, self.VG[i], self.VF[i], MUL_TK_K)
+        _from_tower(b, c)
+        self.stash[t] = c
+        nvf, nvg = self.p2_sizes.pop()
+        self.pool.resize(self.VG, nvg)
+        self.pool.resize(self.VF, nvf)
+        self.pool.release(self.VF.pop(0))
 
-        omega_indices = range(m // 2 + 1, m // 2 + t + 1)
-        step_multipliers = [
-            (k, gf.pow(primitive, k)) for k in range(1, t + 1)
-        ] + [
-            (k, gf.pow(primitive, (m - 2 - k) % block_length))
-            for k in omega_indices
-            if (m - 2 - k) % block_length != 0
-        ]
-        sum_pairs = (
-            [(reg_b[k], omega) for k in range(m // 2 + 1, m // 2 + t)]
-            + [(reg_b[k], sigma_prime) for k in range(3, t + 1, 2)]
-            + [(reg_b[k], sigma) for k in range(2, t + 1, 2)]
-            + [(sigma_prime, sigma)]
-        )
-        fwd_src = km.array([q for src, _ in sum_pairs for q in src])
-        fwd_dst = km.array([q for _, dst in sum_pairs for q in dst])
-        rev_src = km.array([q for src, _ in reversed(sum_pairs) for q in src])
-        rev_dst = km.array([q for _, dst in reversed(sum_pairs) for q in dst])
-
-        num_positions = min(block_length, len(error_mbuc))
-        forney_step = builder.mark('forney_step')
-        for j in range(num_positions):
+    # ------------------------------------------------------------------ Forney
+    def _forney(self):
+        b = self.b
+        gf = km.GF2Field(DEG)
+        alpha = gf.primitive_element
+        order = (1 << DEG) - 1
+        vg, vf = self.VG, self.VF
+        m = len(self.E)
+        mult = [(vg[i], gf.pow(alpha, i % order)) for i in range(1, len(vg))]
+        mult += [(vf[i], gf.pow(alpha, (i - 70) % order)) for i in range(len(vf))
+                 if (i - 70) % order]
+        pairs = ([(vg[i], vg[1]) for i in range(3, len(vg), 2)]
+                 + [(vg[1], vg[0])]
+                 + [(vg[i], vg[0]) for i in range(2, len(vg), 2)]
+                 + [(vf[i], vf[0]) for i in range(1, len(vf))])
+        src = km.array([q for s, _ in pairs for q in s])
+        dst = km.array([q for _, d in pairs for q in d])
+        rsrc = km.array([q for s, _ in reversed(pairs) for q in s])
+        rdst = km.array([q for _, d in reversed(pairs) for q in d])
+        is_error = b.alloc_bits(1)
+        forney_step = b.mark('forney_step')
+        for j in range(m):
             with forney_step:
-                builder.bit_store(is_error[0], True, control=error_mbuc[j])
-                builder.push_condition(is_error[0])
-
-                builder.cx(fwd_src, fwd_dst)
-                zt = ZeroTest(builder, sigma)
+                b.bit_store(is_error[0], True, control=self.E[j])
+                b.push_condition(is_error[0])
+                b.cx(src, dst)
+                zt = ZeroTest(b, vg[0])
                 is_zero = zt.compute()
-                inv = tower.TowerInverse(builder, sigma_prime, gate=is_zero)
-                y = inv.compute()  # sigma'^{-1} where sigma == 0, else 0 (kickmix basis)
-                builder.gf2_phase_by_product(omega, y, mask=error_mbuc[j], field=gf)
+                inv = tower.TowerInverse(b, vg[1], gate=is_zero)
+                y = inv.compute()
+                b.gf2_phase_by_product(vf[0], y, mask=self.E[j], field=gf)
                 inv.uncompute()
                 inv.release()
                 zt.uncompute()
-                builder.cx(rev_src, rev_dst)
+                b.cx(rsrc, rdst)
+                b.pop_condition()
+                b.bit_store(is_error, False)
+                if j + 1 < m:
+                    for reg, step in mult:
+                        b.gf2_imul(step, target=reg, field=gf)
+        if m > 1:
+            for reg, step in mult:
+                b.gf2_idiv(gf.pow(step, m - 1), target=reg, field=gf)
+        b.free(is_error)
 
-                builder.pop_condition()
-                builder.bit_store(is_error, False)
+    # ------------------------------------------------------------------ driver
+    def build(self):
+        b = self.b
+        self.scratch = b.alloc_qubits(1)[0]
+        self.delta = b.alloc_qubits(DELTA_BITS)
+        b.x(self.delta[0])                                   # delta = 1
+        f0 = b.alloc_qubits(DEG)
+        b.x(f0[0])                                           # f = 1
+        self.F = [f0]
+        self.G = [self.S[N_SYN - 1 - i] for i in range(N_SYN)]
+        self.stash, self.swapbits, self.p1_sizes, self.p2_sizes = {}, {}, [], []
+        with b.mark('phase1'):
+            for t in range(N_SYN):
+                self._p1(t)
+        one = self.pool.acquire()
+        b.x(one[0])
+        self.VF, self.VG = [], [one]
+        with b.mark('phase2'):
+            for j in range(N_SYN):
+                self._p2(j)
+        with b.mark('forney'):
+            self._forney()
+        with b.mark('phase2_rev'):
+            for j in reversed(range(N_SYN)):
+                self._p2_rev(j)
+        assert not self.VF and len(self.VG) == 1
+        b.x(self.VG[0][0])
+        self.pool.release(self.VG.pop())
+        with b.mark('phase1_rev'):
+            for t in reversed(range(N_SYN)):
+                self._p1_rev(t)
+        assert len(self.F) == 1 and self.F[0] is f0
+        assert all(a is b for a, b in zip(self.G, [self.S[N_SYN - 1 - i] for i in range(N_SYN)]))
+        b.x(f0[0])
+        b.free(f0)
+        b.x(self.delta[0])
+        b.free(self.delta)
+        for reg in self.pool.free:
+            b.free(reg)
+        b.free(self.scratch)
 
-                if j + 1 < num_positions:
-                    for k, step in step_multipliers:
-                        builder.gf2_imul(step, target=reg_b[k], field=gf)
 
-        if num_positions > 1:
-            for k, step in step_multipliers:
-                builder.gf2_idiv(gf.pow(step, num_positions - 1), target=reg_b[k], field=gf)
-
-        builder.free(is_error)
-
-        with builder.mark('unalign_reg_b'):
-            self._pre_align_reg_b(builder, reg_b, n_b, n_B, is_adjoint=True)
-
-
-def build_circuit(m, n, degree, decoder_cls=TowerDecoder):
+def build_circuit(m=4095, n=N_SYN, degree=DEG):
+    assert n == N_SYN and degree == DEG
     builder = km.CircuitBuilder()
     syndromes = [builder.create_quantum_register(degree, name=f'S{i}') for i in range(n)]
     error_mbuc = [builder.create_classical_register(degree, name=f'E{j}') for j in range(m)]
-    decoder_cls(n, km.GF2Field(degree)).build_syndrome_decoding_mbuc(
-        builder, syndromes=syndromes, error_mbuc=error_mbuc,
-        n_iters=ref.default_n_iters(n))
+    TwoPhaseDecoder(builder, syndromes, error_mbuc).build()
     return builder.finish_circuit()
 
 
@@ -257,13 +346,10 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('output', nargs='?', default='dqi.kmb')
     p.add_argument('--m', type=int, default=4095)
-    p.add_argument('--n', type=int, default=70)
-    p.add_argument('--degree', type=int, default=12)
     a = p.parse_args()
-    c = build_circuit(a.m, a.n, a.degree)
+    c = build_circuit(a.m)
     c.to_file(a.output, format='kmb')
-    print(f'{a.output}: {c.operation_statistics().num_toffoli_like:,} Toffolis, '
-          f'{c.num_qubits} qubits')
+    print(f'{a.output}: {c.operation_statistics().num_toffoli_like:,} Toffolis, {c.num_qubits} qubits')
 
 
 if __name__ == '__main__':

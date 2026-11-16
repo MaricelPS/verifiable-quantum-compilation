@@ -3,7 +3,7 @@ import sys, pathlib, numpy as np
 import os
 # Paths: set KICKMIX_DIR / VERIFIERS_DIR (on Kaggle, the competition data's kickmix/ and verifiers/),
 # or QROOT with km/ and verifiers/ inside it.
-ROOT = pathlib.Path(os.environ.get('QROOT', '/home/claude/kq'))
+ROOT = pathlib.Path(os.environ.get('QROOT', 'competition'))
 KICKMIX_DIR = pathlib.Path(os.environ.get('KICKMIX_DIR', ROOT/'km'))
 VERIFIERS_DIR = pathlib.Path(os.environ.get('VERIFIERS_DIR', ROOT/'verifiers'))
 sys.path[:0] = [str(KICKMIX_DIR), str(VERIFIERS_DIR)]

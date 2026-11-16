@@ -19,3 +19,7 @@ tower,initial shift,61824,
 tower,EEA degree bookkeeping,24864,
 tower,EEA halting counter,21312,
 tower,other,9324,
+two-phase,total,1075230,2046
+two-phase,Chien search and Forney,376740,
+two-phase,"key equation, phase 2 (replay)",186048,
+two-phase,"key equation, phase 1 (divsteps)",512442,

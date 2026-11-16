@@ -1,4 +1,4 @@
-import sys; import os; R_=os.environ.get('QROOT','/home/claude/kq'); sys.path[:0]=[R_+'/km',R_+'/verifiers']
+import sys; import os; R_=os.environ.get('QROOT','competition'); sys.path[:0]=[R_+'/km',R_+'/verifiers']
 from math import ceil
 from dfthcsos.verify import heuristic_costs
 N=76
