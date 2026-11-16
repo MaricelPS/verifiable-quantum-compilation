@@ -11,17 +11,17 @@ syndromes in 70 quantum registers and must:
 The verifier simulates 102,400 random shots. The score is R · Q² · T: a repetition factor R that grows with the
 error rate (R = 1.19 with zero errors, because of a 2⁻¹²⁸-confidence bound), qubits squared, and Toffolis per shot.
 
-| | Reference decoder | v1: tower field | **v2: two-phase solver** |
-|---|---|---|---|
-| Qubits Q | 1,893 | 1,867 | 2,046 |
-| Toffolis per shot T | 5,725,108 | 4,146,652 | **1,075,138** |
-| Failed shots (of 102,400) | 0 | 0 | 2 |
-| Repetition factor R | 1.191 | 1.191 | 1.201 |
-| Score R · Q² · T | 2.444 × 10¹³ | 1.722 × 10¹³ | **5.407 × 10¹²** |
-| Improvement | ×1.00 | ×1.42 | **×4.52** |
+| | Reference decoder | v1: tower field | v2: two-phase solver | **v3: packed arrays** |
+|---|---|---|---|---|
+| Qubits Q | 1,893 | 1,867 | 2,046 | **1,811** |
+| Toffolis per shot T | 5,725,108 | 4,146,652 | 1,075,138 | 1,089,324 |
+| Failed shots (of 102,400) | 0 | 0 | 2 | 11 |
+| Repetition factor R | 1.191 | 1.191 | 1.201 | 1.232 |
+| Score R · Q² · T | 2.444 × 10¹³ | 1.722 × 10¹³ | 5.407 × 10¹² | **4.401 × 10¹²** |
+| Improvement | ×1.00 | ×1.42 | ×4.52 | **×5.55** |
 
-All three columns come from full official verifications ([`results/`](results/)). The circuit built from this
-folder is byte-identical to the submitted one (sha256 `f296d406…`).
+All columns come from full official verifications ([`results/`](results/)). Each decoder built from this folder
+is byte-identical to the one submitted (v1 `ff4a44db…`, v2 `f296d406…`, v3 `a086a75c…`).
 
 ![Toffoli breakdown](../figures/dqi_toffoli_breakdown.png)
 
@@ -98,6 +98,31 @@ Results against v1:
 - Forney stays at 377 k (92 Toffolis per position) and is now 35% of the total;
 - Q rises by 179 qubits: the 70 stored swap bits plus the room for low-weight errors, whose f keeps its length.
 
+## v3: the same algorithm in fewer qubits
+
+With T down by 4×, qubits (squared in the score) became the lever. v2 spent them in two places:
+
+- **Separate arrays for f and g.** A single shot never needs more than ~141 coefficients for f, g and
+  the stash together, but sizing f and g separately reserved 156. Errors of low weight end with a long f and a
+  short g, full-weight errors with both at about 35. v3 keeps f and g in **one array**: f from the bottom, g
+  reversed from the top. Every operation pairs position i with len − 1 − i. Swaps and sweeps then act on
+  disjoint zones for the shots that need them, and do nothing (c = 0, no swap) for the others. Dividing g by x
+  pops the array's top register into the stash, so array plus stash stay at a constant 143 registers.
+- **70 stored swap bits.** The swap of step t can be recomputed after the step as
+  (δ_{t+1} ≤ 0) and (c_t ≠ 0). The rule is exact except after a non-swap elimination with δ < 0, which
+  happens in about 0.7% of shots. The step index of such an *exception* goes into a 7-qubit register X.
+  Phase 2 runs δ backwards with the same rule and checks X, then clears the bit with
+  (δ_t ≥ 1) and (v_f(0) ≠ 0), which holds right after the swap. A shot with two exceptions fails
+  (7 in 100,000).
+
+Smaller savings: the GF(2³) inverse is computed in place instead of on a copy (3 qubits), registers are
+returned to the builder instead of being kept in reserve, and idle syndrome registers stand in for array
+registers during Forney. In total, Q went from 2,046 to 1,811 for +1.3% of Toffolis and about 9 more failed shots
+(R +2.5%): ×1.23 on the score.
+
+`model/packed.py` checks both changes on the classical model: the packed layout reproduces every stashed
+quotient on 30,000 shots, and the exception rule fails only in shots with two exceptions.
+
 ## Testing
 
 - `model/two_phase.py`: on random shots, σ has its roots exactly at the error positions, every quotient pops
@@ -107,14 +132,15 @@ Results against v1:
   - multiplication on 4,096 random triples, exactly 54 Toffolis;
   - inversion on **all** 4,096 inputs, gated and ungated, exactly 78 and 81 Toffolis;
   - the basis change is a field isomorphism.
-- `tests/test_two_phase.py`: the classical model, and the full v2 circuit on 2,560 verifier shots.
+- `tests/test_tower.py` also covers the lean inverse of v3 (all 4,096 inputs, 3 fewer ancillas).
+- `tests/test_two_phase.py`: the classical model, and the full v3 circuit on 2,560 verifier shots.
 - `tests/test_decoder_tower_eea.py`: v1 passes the verifier on a small instance.
 
 ```bash
 export COMP_DIR=/path/to/competition-data      # folder with kickmix/ and verifiers/
-python -m pytest dqi/tests -q                   # 7 tests, about a minute
+python -m pytest dqi/tests -q                   # 9 tests, about a minute
 python dqi/model/two_phase.py 400               # classical check of the algorithm
-python dqi/decoder.py dqi.kmb                   # the submitted circuit, ~30 s, 488 MB
+python dqi/decoder.py dqi.kmb                   # the submitted circuit (v3), ~1 min, 485 MB
 python "$COMP_DIR/verifiers/dqi/verify_submission_dqi.py" dqi.kmb
 ```
 
@@ -123,25 +149,24 @@ the score; the Kaggle notebooks fall back to a copy of the verifier without that
 
 ## What is left
 
-- **The 70 stored swap bits** (3.4% of Q, so about 7% of the score). Phase 2 needs to know which steps swapped. The
-  bit cannot be told from δ alone, because a swap and a non-swap can lead to the same δ.
-- **Room for low-weight errors.** For errors of weight k < 35, the last 70 − 2k steps do nothing and f keeps
-  70 − k coefficients, while a weight-35 error ends with 35. The fixed layout has to reserve the larger size,
-  about 180 qubits.
-- **Forney**, now the largest single stage, is close to its floor with this approach: 11 Toffolis for the zero
-  test and 81 for the gated inverse, at each of 4,095 positions.
+- **Failed shots.** 11 of 102,400, costing 3.4% through R. A second exception register (7 qubits) would remove
+  the double-exception failures; supporting error weight 19 would cost one more register.
+- **v_f and v_g** in phase 2 could share one array the same way f and g do (about 2 registers).
+- **Forney**, now 35% of the Toffolis, is close to its floor with this approach: 11 Toffolis for the zero test
+  and 81 for the gated inverse, at each of 4,095 positions.
 
 ## Files
 
 | File | Role |
 |---|---|
-| `decoder.py` | v2, the submitted decoder: `TwoPhaseDecoder` builds `dqi.kmb` |
+| `decoder.py` | v3, the submitted decoder: `TwoPhaseDecoder` builds `dqi.kmb` |
+| `decoder_v2.py` | v2: the same algorithm with separate f and g arrays and stored swap bits |
 | `bounds_k20.json` | Per-step register layout used by `decoder.py` |
-| `model/` | Classical model: field (`gf.py`), algorithm (`two_phase.py`), layout bounds (`bounds.py`) |
+| `model/` | Classical model: field (`gf.py`), algorithm (`two_phase.py`), layout bounds (`bounds.py`), v3 checks (`packed.py`) |
 | `tower.py` | Tower field: classical arithmetic, basis change, bilinear term lists, quantum emitters, `TowerInverse` |
 | `decoder_tower_eea.py` | v1: the reference EEA with tower-field arithmetic |
 | `tests/` | Simulation tests (see above) |
 | `profile_stages.py` | Toffolis per stage by ablation, for the three decoders (`results/stage_profile.csv`) |
 | `schedule_analysis.py` | Sub-step schedule of the reference EEA across random inputs |
-| `kaggle_notebook_v1.ipynb`, `kaggle_notebook_v2.ipynb` | The Kaggle notebooks that built, verified and packaged each submission (sources embedded) |
+| `kaggle_notebook_v1.ipynb` … `_v3.ipynb` | The Kaggle notebooks that built, verified and packaged each submission (sources embedded) |
 | `results/` | Official verifier outputs and analysis tables |

@@ -40,13 +40,14 @@ def leaderboard():
     ax.set_xticks(range(len(d)))
     ax.set_xticklabels([s.replace('|', '\n') for s in d.label], fontsize=8.5)
     ax.set_ylabel('public score (geometric mean of\nimprovements over the 3 tasks)')
-    ax.set_ylim(0, 3.8)
+    ax.set_ylim(0, 4.1)
     ax.set_title('Public leaderboard score, submission by submission')
     save(fig, 'leaderboard.png')
 
 
 def dqi_breakdown():
     d = pd.read_csv(ROOT / 'dqi' / 'results' / 'stage_profile.csv')
+    qubits = d[d.stage == 'total'].set_index('decoder').qubits.astype(int)
     d = d[d.stage != 'total']
 
     def group(stage):
@@ -58,12 +59,13 @@ def dqi_breakdown():
 
     d = d.assign(group=d.stage.map(group))
     piv = d.pivot_table(index='decoder', columns='group', values='toffolis', aggfunc='sum').fillna(0) / 1e6
-    order = ['two-phase', 'tower', 'reference']
-    labels = {'reference': 'reference decoder\n(synchronized EEA)', 'tower': 'tower-field arithmetic\n(same EEA)',
-              'two-phase': 'two-phase solver\n+ tower field'}
+    order = ['two-phase v3', 'two-phase v2', 'tower', 'reference']
+    labels = {'reference': 'reference\n(synchronized EEA)', 'tower': 'v1: tower field\n(same EEA)',
+              'two-phase v2': 'v2: two-phase\nsolver', 'two-phase v3': 'v3: packed\narrays'}
     groups = [('key-equation solver', S1), ('Chien search and Forney', S2), ('other', '#b4b2a9')]
-    fig, ax = plt.subplots(figsize=(8, 3.6))
-    ax.grid(axis='y', visible=False)
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(10, 3.9), gridspec_kw=dict(width_ratios=[2.2, 1]), sharey=True)
+    for a in (ax, bx):
+        a.grid(axis='y', visible=False)
     left = [0.0] * len(order)
     for name, color in groups:
         vals = [piv.loc[o, name] for o in order]
@@ -76,9 +78,18 @@ def dqi_breakdown():
     ax.set_yticks(range(len(order)))
     ax.set_yticklabels([labels[o] for o in order], fontsize=9.5)
     ax.set_xlabel('Toffoli gates (millions)')
-    ax.set_xlim(0, 6.6)
-    ax.set_title('dqi: Toffolis by decoder stage')
-    ax.legend(loc='lower right', fontsize=9)
+    ax.set_xlim(0, 6.9)
+    ax.set_title('Toffolis by stage')
+    ax.legend(loc='lower right', fontsize=8.5)
+    q = [qubits[o] for o in order]
+    bx.barh(range(len(order)), q, height=0.55, color=S1, edgecolor=BG, linewidth=2)
+    for i, v in enumerate(q):
+        bx.annotate(f'{v:,}', (v, i), xytext=(6, 0), textcoords='offset points', va='center', color=INK2,
+                    fontsize=9.5)
+    bx.set_xlim(0, 2600)
+    bx.set_xlabel('logical qubits')
+    bx.set_title('Qubits')
+    fig.suptitle('dqi decoders: score = R · Q² · T', x=0.01, ha='left', fontsize=13, fontweight='bold')
     save(fig, 'dqi_toffoli_breakdown.png')
 
 

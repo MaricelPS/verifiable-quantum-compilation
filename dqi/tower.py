@@ -356,6 +356,80 @@ def emit_linear(builder, src, dst, cols):
                 builder.cx(src[j], dst[k])
 
 
+def _pair_program(xf, yf, n):
+    """CNOT program putting forms xf, yf (independent) on qubits 0 and 1 of an n-qubit register."""
+    rows = [xf, yf]
+    for e in range(n):
+        cand = 1 << e
+        # Complete to a basis greedily (GF(2) rank check).
+        test = rows + [cand]
+        if _rank(test, n) == len(test):
+            rows.append(cand)
+        if len(rows) == n:
+            break
+    cols = [sum(((rows[i] >> j) & 1) << i for i in range(n)) for j in range(n)]
+    return _cnot_program(cols)
+
+
+def _rank(rows, n):
+    rows, r = list(rows), 0
+    for c in range(n):
+        p = next((i for i in range(r, len(rows)) if (rows[i] >> c) & 1), None)
+        if p is None:
+            continue
+        rows[r], rows[p] = rows[p], rows[r]
+        for i in range(len(rows)):
+            if i != r and (rows[i] >> c) & 1:
+                rows[i] ^= rows[r]
+        r += 1
+    return r
+
+
+def emit_quadratic_inplace(builder, X, out, terms, scratch):
+    """out ^= Q(X) for a quadratic form given as terms (xf, yf, ov) over the same register X."""
+    for xf, yf, ov in terms:
+        if not ov or not xf or not yf:
+            continue
+        targets = [out[k] for k in range(len(out)) if (ov >> k) & 1]
+        if xf == yf:                                  # (l.x)^2 = l.x over GF(2)
+            p, rest = _prep(builder, X, xf)
+            builder.cx(X[p], km.array(targets))
+            _unprep(builder, X, p, rest)
+            continue
+        prog = _pair_program(xf, yf, len(X))
+        _run_program(builder, X, prog)
+        if len(targets) == 1:
+            builder.ccx(X[0], X[1], targets[0])
+        else:
+            builder.init_and(X[0], X[1], scratch)
+            builder.cx(scratch, km.array(targets))
+            builder.del_and(X[0], X[1], scratch)
+        _run_program(builder, X, _invert_program(prog))
+
+
+def emit_quadratic_mbuc_clear(builder, X, out, terms):
+    """Clears `out` (holding exactly Q(X)) by X-measurement and CZ / Z phase fix-ups."""
+    bits = builder.alloc_bits(len(out))
+    builder.hmr(out, bits)
+    for k in range(len(out)):
+        sel = [(xf, yf) for xf, yf, ov in terms if (ov >> k) & 1 and xf and yf]
+        if not sel:
+            continue
+        builder.push_condition(bits[k])
+        for xf, yf in sel:
+            if xf == yf:
+                p, rest = _prep(builder, X, xf)
+                builder.z(X[p])
+                _unprep(builder, X, p, rest)
+                continue
+            prog = _pair_program(xf, yf, len(X))
+            _run_program(builder, X, prog)
+            builder.cz(X[0], X[1])
+            _run_program(builder, X, _invert_program(prog))
+        builder.pop_condition()
+    builder.free(bits)
+
+
 # ----------------------------------------------------------------------------------------
 # Tower inverse.
 
@@ -398,10 +472,13 @@ def _inverse_tables():
 class TowerInverse:
     """y = gate ? x^{-1} : 0 for x in a kickmix-basis register; 78 (+3 if gated) Toffolis."""
 
-    def __init__(self, builder, x, *, gate=None, out_basis='kickmix'):
+    def __init__(self, builder, x, *, gate=None, out_basis='kickmix', lean=False):
         self.b = builder
         self.x = x
         self.gate = gate
+        # lean: 3 fewer qubits. Gated: the gate goes into the copy of n (no separate gated n).
+        # Ungated: n^6 is computed from n alone with in-place linear changes (no copy of n).
+        self.lean = lean
         T, Tinv = basis_matrices()
         tb = _inverse_tables()
         self.tb = tb
@@ -423,15 +500,25 @@ class TowerInverse:
         emit_bilinear(b, c_q, d_q, self.n, terms_mul8(), self.scratch)
         emit_linear(b, c_q, self.n, tb['n_lin_c'])
         emit_linear(b, d_q, self.n, tb['n_lin_d'])
-        if self.gate is not None:
-            self.ng = b.alloc_qubits(3)
-            b.init_and(self.gate, self.n, self.ng)
+        self.ninv = None
+        if self.lean and self.gate is not None:
+            self.ncopy = b.alloc_qubits(3)
+            b.init_and(self.gate, self.n, self.ncopy)
+            self.ninv = b.alloc_qubits(3)
+            emit_bilinear(b, self.n, self.ncopy, self.ninv, tb['ninv'], self.scratch)
+        elif self.lean:
+            self.ninv = b.alloc_qubits(3)
+            emit_quadratic_inplace(b, self.n, self.ninv, tb['ninv'], self.scratch)
         else:
-            self.ng = self.n
-        self.ncopy = b.alloc_qubits(3)
-        b.cx(self.ng, self.ncopy)
-        self.ninv = b.alloc_qubits(3)
-        emit_bilinear(b, self.ng, self.ncopy, self.ninv, tb['ninv'], self.scratch)
+            if self.gate is not None:
+                self.ng = b.alloc_qubits(3)
+                b.init_and(self.gate, self.n, self.ng)
+            else:
+                self.ng = self.n
+            self.ncopy = b.alloc_qubits(3)
+            b.cx(self.ng, self.ncopy)
+            self.ninv = b.alloc_qubits(3)
+            emit_bilinear(b, self.ng, self.ncopy, self.ninv, tb['ninv'], self.scratch)
         self.Ninv = b.alloc_qubits(6)
         emit_bilinear(b, self.N, self.ninv, self.Ninv, tb['Ninv'], self.scratch)
         self.y = b.alloc_qubits(12)
@@ -446,13 +533,22 @@ class TowerInverse:
         b.free(self.y)
         emit_bilinear_mbuc_clear(b, self.N, self.ninv, self.Ninv, tb['Ninv'])
         b.free(self.Ninv)
-        emit_bilinear_mbuc_clear(b, self.ng, self.ncopy, self.ninv, tb['ninv'])
-        b.free(self.ninv)
-        b.cx(self.ng, self.ncopy)
-        b.free(self.ncopy)
-        if self.gate is not None:
-            b.del_and(self.gate, self.n, self.ng)
-            b.free(self.ng)
+        if self.lean and self.gate is not None:
+            emit_bilinear_mbuc_clear(b, self.n, self.ncopy, self.ninv, tb['ninv'])
+            b.free(self.ninv)
+            b.del_and(self.gate, self.n, self.ncopy)
+            b.free(self.ncopy)
+        elif self.lean:
+            emit_quadratic_mbuc_clear(b, self.n, self.ninv, tb['ninv'])
+            b.free(self.ninv)
+        else:
+            emit_bilinear_mbuc_clear(b, self.ng, self.ncopy, self.ninv, tb['ninv'])
+            b.free(self.ninv)
+            b.cx(self.ng, self.ncopy)
+            b.free(self.ncopy)
+            if self.gate is not None:
+                b.del_and(self.gate, self.n, self.ng)
+                b.free(self.ng)
         c_q, d_q = self.N[0:3], self.N[3:6]
         emit_linear(b, d_q, self.n, tb['n_lin_d'])
         emit_linear(b, c_q, self.n, tb['n_lin_c'])

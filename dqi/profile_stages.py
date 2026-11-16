@@ -52,9 +52,10 @@ def main(out):
 
 
 
-def profile_two_phase(out):
-    """Ablation for the two-phase decoder: drop Forney, then phase 2 as well."""
-    import decoder as two_phase
+def profile_two_phase(out, module='decoder', label='two-phase v3'):
+    """Ablation for a two-phase decoder: drop Forney, then phase 2 as well."""
+    import importlib
+    two_phase = importlib.import_module(module)
 
     def total(skip=()):
         cls = type('Ablated', (two_phase.TwoPhaseDecoder,), {name: (lambda self, *a, **k: None) for name in skip})
@@ -69,10 +70,10 @@ def profile_two_phase(out):
     no_forney, _ = total(['_forney'])
     no_p2, _ = total(['_forney', '_p2', '_p2_rev'])
     rows = [
-        dict(decoder='two-phase', stage='total', toffolis=full, qubits=qubits),
-        dict(decoder='two-phase', stage='Chien search and Forney', toffolis=full - no_forney, qubits=''),
-        dict(decoder='two-phase', stage='key equation, phase 2 (replay)', toffolis=no_forney - no_p2, qubits=''),
-        dict(decoder='two-phase', stage='key equation, phase 1 (divsteps)', toffolis=no_p2, qubits=''),
+        dict(decoder=label, stage='total', toffolis=full, qubits=qubits),
+        dict(decoder=label, stage='Chien search and Forney', toffolis=full - no_forney, qubits=''),
+        dict(decoder=label, stage='key equation, phase 2 (replay)', toffolis=no_forney - no_p2, qubits=''),
+        dict(decoder=label, stage='key equation, phase 1 (divsteps)', toffolis=no_p2, qubits=''),
     ]
     with open(out, 'a', newline='') as f:
         csv.DictWriter(f, fieldnames=['decoder', 'stage', 'toffolis', 'qubits']).writerows(rows)
@@ -83,4 +84,5 @@ def profile_two_phase(out):
 if __name__ == '__main__':
     path = sys.argv[1] if len(sys.argv) > 1 else 'results/stage_profile.csv'
     main(path)
-    profile_two_phase(path)
+    profile_two_phase(path, 'decoder_v2', 'two-phase v2')
+    profile_two_phase(path, 'decoder', 'two-phase v3')

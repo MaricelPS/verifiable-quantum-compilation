@@ -74,3 +74,22 @@ def test_inverse_all_inputs(gated):
     assert (yo == expected).all() and (xo == x).all()
     assert not dirty.any() and not phase.any()
     assert tof == (81 if gated else 78)
+
+
+@pytest.mark.parametrize('gated', [False, True])
+def test_lean_inverse_all_inputs(gated):
+    """The lean variant used by the v3 decoder: 3 fewer ancillas, same values."""
+    x = np.arange(4096)
+    gate = np.random.default_rng(2).integers(0, 2, 4096) if gated else np.ones(4096, int)
+
+    def build(b, regs):
+        inv = tower.TowerInverse(b, regs[0], gate=regs[2][0] if gated else None, lean=True)
+        b.cx(inv.compute(), regs[1])
+        inv.uncompute()
+        inv.release()
+
+    (xo, yo, _), dirty, phase, tof = _run(build, [x, np.zeros(4096, int), gate], [12, 12, 1])
+    expected = np.array([GF.invert(int(a)) if a and g else 0 for a, g in zip(x, gate)])
+    assert (yo == expected).all() and (xo == x).all()
+    assert not dirty.any() and not phase.any()
+    assert tof == (81 if gated else 77)

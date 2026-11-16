@@ -10,9 +10,9 @@ the submitted data exactly.
 |---|---|---|---|---|
 | [**Chemistry**](chemistry/) (`dfthcsos`) | Block-encodes the FeMoCo Hamiltonian (nitrogenase active site) for phase estimation | λ_eff · T · Q | 3.356 × 10⁹ → 1.952 × 10⁹ | **×1.719** |
 | [**invsqrt**](invsqrt/) | Applies the phase e^{2πi/√x} to an integer register | Q · C | 2,076,774 → 431,442 | **×4.81** |
-| [**dqi**](dqi/) | Decodes a Reed–Solomon code inside Decoded Quantum Interferometry | R · Q² · T | 2.444 × 10¹³ → 5.407 × 10¹² | **×4.52** |
+| [**dqi**](dqi/) | Decodes a Reed–Solomon code inside Decoded Quantum Interferometry | R · Q² · T | 2.444 × 10¹³ → 4.401 × 10¹² | **×5.55** |
 
-The competition score is the geometric mean of the three improvements: **3.340** on the public leaderboard.
+The competition score is the geometric mean of the three improvements: **3.587** on the public leaderboard.
 
 ![Leaderboard history](figures/leaderboard.png)
 
@@ -42,7 +42,7 @@ Toffoli count by 59%, and spending the remaining error margin on the normalizati
 by bit, reads a 256-entry table of piecewise-quadratic coefficients, and evaluates the polynomial with truncated
 Horner steps tuned by greedy search: 40% fewer qubits and 67% fewer Toffolis.
 
-**[dqi](dqi/README.md).** Two steps.
+**[dqi](dqi/README.md).** Three steps.
 - **Field arithmetic.** Rewriting GF(2¹²) as a tower GF(((2³)²)²) turns every multiplication and inversion into a
   network of AND gates that is uncomputed by measurement: inversion drops from 315 Toffolis to 78, multiplication
   from 63 to 54 (×1.42).
@@ -51,6 +51,8 @@ Horner steps tuned by greedy search: 40% fewer qubits and 67% fewer Toffolis.
   schedule of 2 × 70 steps: Bernstein–Yang divsteps whose quotients are stashed, for free, in the registers that
   the division by x releases, then a replay of the transition matrices that rebuilds σ and ω and pops the stash.
   The algorithm was checked on a classical model first. Toffolis dropped from 4.15 M to 1.08 M (×4.52 overall).
+- **Qubits.** Packing both remainders into one array and recomputing the swap bits instead of storing them took
+  Q from 2,046 to 1,811 (×5.55 overall).
 
 ![dqi Toffoli breakdown](figures/dqi_toffoli_breakdown.png)
 
@@ -74,7 +76,7 @@ is not redistributed. Download it from the competition page and point `COMP_DIR`
 export COMP_DIR=/path/to/competition-data
 python -m pytest dqi/tests -q          # tower field, classical model, full decoder (~1 min)
 python invsqrt/build.py invsqrt.kmb    # the submitted invsqrt circuit
-python dqi/decoder.py dqi.kmb          # the submitted dqi circuit (~30 s, 488 MB)
+python dqi/decoder.py dqi.kmb          # the submitted dqi circuit (~1 min, 485 MB)
 python scripts/make_figures.py         # overview figures
 ```
 

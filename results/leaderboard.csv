@@ -6,3 +6,4 @@ chemistry x1.699,chem ×1.699,1.699,1.000,1.000,1.19320
 chemistry x1.719 + invsqrt x4.81,chem ×1.719|invsqrt ×4.81,1.719,4.81,1.000,2.02261
 + own dqi x1.419 (tower field),+ dqi ×1.419|(tower field),1.719,4.81,1.419,2.27307
 + own dqi x4.52 (two-phase solver),+ dqi ×4.52|(two-phase),1.719,4.81,4.52,3.34030
++ own dqi x5.55 (packed v3),+ dqi ×5.55|(packed),1.719,4.81,5.553,3.58736
